@@ -4,9 +4,5 @@ import { plugin as mdPlugin, Mode } from 'vite-plugin-markdown'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-
-  // plugins: [react(), mdPlugin({ mode: [Mode.HTML, Mode.MARKDOWN, Mode.REACT] })],
   plugins: [react(), mdPlugin({ mode: [Mode.HTML, Mode.MARKDOWN, Mode.REACT] })],
-
-  // assetsInclude: ['markdown/']
 })
