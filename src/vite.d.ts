@@ -6,14 +6,14 @@ declare module '*.md' {
     // const toc: { level: string, content: string }[];
 
     // When "Mode.HTML" is requested
-    const html: string;
+    // const html: string;
 
     // When "Mode.MARKDOWN" is requested
     const markdown: string
 
     // When "Mode.React" is requested. VFC could take a generic like React.VFC<{ MyComponent: TypeOfMyComponent }>
-    import React from 'react'
-    const ReactComponent: React.VFC;
+    // import React from 'react'
+    // const ReactComponent: React.VFC;
 
     // When "Mode.Vue" is requested
     // import { ComponentOptions, Component } from 'vue';
@@ -22,5 +22,5 @@ declare module '*.md' {
 
     // Modify below per your usage
     // export { attributes, toc, html, ReactComponent, VueComponent, VueComponentWith };
-    export { attributes, html, markdown, ReactComponent };
+    export { attributes, markdown };
 }
