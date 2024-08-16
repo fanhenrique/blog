@@ -1,0 +1,22 @@
+import { Routes, Route } from "react-router-dom"
+
+// internal imports
+import Home from "./pages/Home"
+import About from "./pages/About"
+import Editors from "./pages/Editors"
+import Contact from "./pages/Contact"
+import Post from "./pages/Post"
+
+export default function Router() {
+
+    return (
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/post/:slug' element={<Post />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/editors' element={<Editors />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path="*" element={<Home />} />
+        </Routes >
+    )
+}
