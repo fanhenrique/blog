@@ -6,12 +6,14 @@ import About from "./pages/About"
 import Editors from "./pages/Editors"
 import Contact from "./pages/Contact"
 import Post from "./pages/Post"
+import RefProvider from "./components/RefProvider"
 
 export default function Router() {
 
     return (
+
         <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<RefProvider children={<Home />} />} />
             <Route path='/post/:slug' element={<Post />} />
             <Route path='/about' element={<About />} />
             <Route path='/editors' element={<Editors />} />
