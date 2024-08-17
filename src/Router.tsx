@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 
 // internal imports
 import Home from "./pages/Home"
@@ -16,7 +16,7 @@ export default function Router() {
             <Route path='/about' element={<About />} />
             <Route path='/editors' element={<Editors />} />
             <Route path='/contact' element={<Contact />} />
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes >
     )
 }

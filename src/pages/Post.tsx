@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -28,11 +28,12 @@ export interface PostInterface {
 
 export default function Post() {
 
+    const navigate = useNavigate()
     const location = useLocation()
 
     const [post, setPost] = useState<PostInterface | undefined>(undefined)
 
-    useEffect((): void => {
+    useEffect(() => {
 
         const modules = import.meta.glob<PostInterface>('../../posts/*.md');
 
@@ -52,6 +53,9 @@ export default function Post() {
         };
 
         loadModules();
+
+        if (!post)
+            navigate('/')
 
     }, []);
 
