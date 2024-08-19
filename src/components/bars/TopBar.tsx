@@ -14,8 +14,8 @@ export default function TopBar() {
             </div>
             <div className="w-1/3 gap-x-14 flex justify-center">
                 <ButtonMenu navigate="/">Home</ButtonMenu>
-                <ButtonMenu navigate="/about">About</ButtonMenu>
-                <ButtonMenu navigate="/editors">Editores</ButtonMenu>
+                <ButtonMenu navigate="/about">Sobre</ButtonMenu>
+                <ButtonMenu navigate="/authors">Autores</ButtonMenu>
                 <ButtonMenu navigate="/contact">Contato</ButtonMenu>
             </div>
             <div className="w-1/3 gap-x-5 flex items-center justify-end">
