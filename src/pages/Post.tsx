@@ -37,7 +37,9 @@ export default function Post() {
 
         const modules = import.meta.glob<PostInterface>('../../posts/*.md');
 
+        let validPost = false
         const loadModules = async () => {
+
             for (const path in modules) {
                 const module = await modules[path]();
                 if (module.attributes.slug == location.pathname.split('/')[2]) {
@@ -48,14 +50,18 @@ export default function Post() {
                             date: new Date(module.attributes.date),
                         },
                     });
+
+                    validPost = true
+                    break
                 }
             }
+
+            if (!validPost)
+                navigate('/')
+
         };
 
         loadModules();
-
-        if (!post)
-            navigate('/')
 
     }, []);
 
