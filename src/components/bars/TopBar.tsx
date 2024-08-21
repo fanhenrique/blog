@@ -1,29 +1,59 @@
-import { Sun } from "@phosphor-icons/react"
-import colors from "tailwindcss/colors"
-
 // internal import
 import ButtonMenu from "./ButtonMenu"
 import Search from "../Search"
+import OpenMenu from "./OpenMenu";
+import useScreenSize from "../hooks/useScreenSize";
+import Title from "./Title";
 
-export default function TopBar() {
+
+interface TopBarProps {
+    open: boolean;
+    onOpen: () => void;
+}
+
+export default function TopBar(props: TopBarProps) {
+
+    const screenSize = useScreenSize()
 
     return (
-        <div className="sticky z-50 top-0 w-full h-20 flex items-center justify-center px-5 bg-secondary-color">
-            <div className="w-1/3">
-                <span className="text-primary-color text-2xl font-bold pointer-events-none">blog</span>
-            </div>
-            <div className="w-1/3 gap-x-14 flex justify-center">
-                <ButtonMenu navigate="/">Home</ButtonMenu>
-                <ButtonMenu navigate="/about">Sobre</ButtonMenu>
-                <ButtonMenu navigate="/authors">Autores</ButtonMenu>
-                <ButtonMenu navigate="/contact">Contato</ButtonMenu>
-            </div>
-            <div className="w-1/3 gap-x-5 flex items-center justify-end">
-                <div className="flex flex-row">
-                    <Search placeholder="Pesquisar" />
-                </div>
-                <Sun size={28} color={colors.gray[200]} />
-            </div>
+        <div className="z-40 top-0 w-full h-20 flex items-center justify-center px-2 md:px-3 lg:px-5 bg-secondary-color">
+            {screenSize.width < 1024 ?
+                <>
+                    <div className="w-full flex">
+                        <OpenMenu className='grow w-2/5' onclick={props.onOpen} />
+
+                        <div className='grow-0 w-1/5 '>
+                            <Title />
+                        </div>
+
+                        <div className="grow-0 w-2/5">
+                            <Search />
+                        </div>
+                    </div>
+
+                </>
+                :
+                <>
+                    <div className='w-2/6 justify-start flex'>
+                        <Title />
+                    </div>
+
+                    <div className="w-3/6 gap-x-5 lg:gap-x-10 flex justify-center">
+                        <ButtonMenu navigate="/">Home</ButtonMenu>
+                        <ButtonMenu navigate="/about">Sobre</ButtonMenu>
+                        <ButtonMenu navigate="/authors">Autores</ButtonMenu>
+                        <ButtonMenu navigate="/contact">Contato</ButtonMenu>
+                    </div>
+
+
+                    <div className="w-2/6 flex justify-end">
+                        <div className="w-4/5">
+                            <Search />
+                        </div>
+                    </div>
+
+                </>
+            }
 
         </div >
     )
