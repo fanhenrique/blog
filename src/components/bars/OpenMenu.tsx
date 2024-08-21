@@ -1,13 +1,13 @@
 import colors from "tailwindcss/colors";
 import { List } from "@phosphor-icons/react";
 
-interface IconMenuProps {
+interface OpenMenuProps {
     className?: string;
     size?: number;
     onclick: () => void;
 }
 
-export default function Menu(props: IconMenuProps) {
+export default function OpenMenu(props: OpenMenuProps) {
 
     return (
         <button
