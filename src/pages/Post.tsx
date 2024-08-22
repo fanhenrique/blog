@@ -9,8 +9,8 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 // internal imports
 import Layout from '../components/Layout'
 import CodeCopyButton from '../components/CodeCopyButton'
-import ListAuthors from '../components/ListAuthors';
 import Comments from '../components/Comments';
+import HeaderPost from '../components/HeaderPost';
 
 export interface AttributesPostInteface {
     id: number,
@@ -78,59 +78,54 @@ export default function Post() {
     return (
 
         <Layout>
-            <div className='w-full flex flex-col gap-y-2 bg-secondary-color p-4'>
-                <div className='flex justify-between text-gray-200'>
-                    <ListAuthors authors={post?.attributes.authors} />
-                    <span className="text-nowrap text-gray-200">
-                        {post?.attributes.date.toLocaleDateString("pt-BR")}
-                    </span>
+            <div className='w-full flex flex-col gap-y-10 bg-secondary-color p-4'>
+                <div className='w-full flex flex-col'>
+                    <HeaderPost authors={post?.attributes.authors} date={post?.attributes.date} />
+                    <Markdown
+                        children={post?.markdown}
+                        className='markdown flex flex-col gap-y-3 text-justify'
+                        skipHtml={false}
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
+                        components={{
+                            pre: Pre,
+                            code(props: any) {
+                                const { children, className } = props
+
+                                const match = /language-(\w+)/.exec(className || '')
+
+                                const lineCount = children.split('\n').length;
+                                const minWidthEm = `${lineCount.toString().length * 0.8}em`;
+
+                                return match ? (
+                                    <SyntaxHighlighter
+                                        PreTag='pre'
+                                        children={String(children).replace(/\n$/, '')}
+                                        language={match[1]}
+                                        style={okaidia}
+                                        showLineNumbers={true}
+                                        lineNumberStyle={{
+                                            paddingRight: '8px',
+                                            minWidth: minWidthEm,
+                                        }}
+                                        customStyle={{
+                                            background: '#0F0F0F',
+                                            padding: '0px',
+                                            paddingBottom: '15px',
+                                            margin: '0px',
+                                            borderRadius: '0px',
+                                            overflowY: 'hidden',
+                                        }}
+                                    />
+                                ) : (
+                                    <code className='markdown-code'>
+                                        {children}
+                                    </code>
+                                )
+                            }
+                        }}
+                    />
                 </div>
-                <hr className="h-0.5 bg-gray-700 border-0 " />
-                <Markdown
-                    children={post?.markdown}
-                    className='markdown flex flex-col gap-y-4 text-justify'
-                    skipHtml={false}
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeRaw]}
-                    components={{
-                        pre: Pre,
-                        code(props: any) {
-                            const { children, className } = props
-
-                            const match = /language-(\w+)/.exec(className || '')
-
-                            const lineCount = children.split('\n').length;
-                            const minWidthEm = `${lineCount.toString().length * 0.8}em`;
-
-                            return match ? (
-                                <SyntaxHighlighter
-                                    PreTag='pre'
-                                    children={String(children).replace(/\n$/, '')}
-                                    language={match[1]}
-                                    style={okaidia}
-                                    showLineNumbers={true}
-                                    lineNumberStyle={{
-                                        paddingRight: '8px',
-                                        minWidth: minWidthEm,
-                                    }}
-                                    customStyle={{
-                                        background: '#0F0F0F',
-                                        padding: '0px',
-                                        paddingBottom: '15px',
-                                        margin: '0px',
-                                        borderRadius: '0px',
-                                        overflowY: 'hidden',
-                                    }}
-                                />
-                            ) : (
-                                <code className='markdown-code'>
-                                    {children}
-                                </code>
-                            )
-                        }
-                    }}
-                />
-
                 <Comments />
             </div>
         </Layout>
