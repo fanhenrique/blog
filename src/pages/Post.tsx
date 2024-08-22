@@ -5,12 +5,12 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import Giscus from '@giscus/react';
 
 // internal imports
 import Layout from '../components/Layout'
 import CodeCopyButton from '../components/CodeCopyButton'
 import ListAuthors from '../components/ListAuthors';
+import Comments from '../components/Comments';
 
 export interface AttributesPostInteface {
     id: number,
@@ -131,22 +131,7 @@ export default function Post() {
                     }}
                 />
 
-                <Giscus
-                    id="comments"
-                    repo="fanhenrique/blog"
-                    repoId="R_kgDOMgtBwQ"
-                    category="Announcements"
-                    categoryId="DIC_kwDOMgtBwc4ChfNk"
-                    mapping="pathname"
-                    term="Welcome to @giscus/react component!"
-                    reactionsEnabled="1"
-                    emitMetadata="0"
-                    inputPosition="top"
-                    theme="dark"
-                    lang="pt"
-                    loading="lazy"
-                />
-
+                <Comments />
             </div>
         </Layout>
     )

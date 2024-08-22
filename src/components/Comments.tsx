@@ -1,0 +1,30 @@
+import Giscus from "@giscus/react";
+
+export default function Comments() {
+
+    return (
+        <div className='w-full flex flex-col gap-y-4'>
+            <div className='w-full flex flex-col'>
+                <span className='text-3xl text-gray-200 font-black'>
+                    Comentários
+                </span>
+                <hr className='h-0.5 bg-gray-700 border-0' />
+            </div>
+            <Giscus
+                id="comments"
+                repo="fanhenrique/blog"
+                repoId="R_kgDOMgtBwQ"
+                category="Announcements"
+                categoryId="DIC_kwDOMgtBwc4ChfNk"
+                mapping="pathname"
+                term="Welcome to @giscus/react component!"
+                reactionsEnabled="1"
+                emitMetadata="0"
+                inputPosition="top"
+                theme="dark"
+                lang="pt"
+                loading="lazy"
+            />
+        </div>
+    )
+}
