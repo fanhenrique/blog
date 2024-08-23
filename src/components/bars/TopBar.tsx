@@ -9,6 +9,7 @@ import Title from "./Title";
 interface TopBarProps {
     open: boolean;
     onOpen: () => void;
+    showSearch: boolean;
 }
 
 export default function TopBar(props: TopBarProps) {
@@ -27,7 +28,7 @@ export default function TopBar(props: TopBarProps) {
                         </div>
 
                         <div className="grow-0 w-2/5">
-                            <Search />
+                            {props.showSearch ? <Search /> : null}
                         </div>
                     </div>
 
@@ -45,10 +46,9 @@ export default function TopBar(props: TopBarProps) {
                         <ButtonMenu navigate="/contact">Contato</ButtonMenu>
                     </div>
 
-
                     <div className="w-2/6 flex justify-end">
                         <div className="w-4/5">
-                            <Search />
+                            {props.showSearch ? <Search /> : null}
                         </div>
                     </div>
 
