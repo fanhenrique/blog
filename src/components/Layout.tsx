@@ -12,16 +12,16 @@ interface LayoutProps {
 
 export default function Layout(props: LayoutProps) {
 
-    const [open, setOpen] = useState(false);
+    const [showSideBar, setShowSideBar] = useState(false);
 
     return (
         <div className="relative">
 
-            <SideBar open={open} onclick={() => setOpen(false)} />
+            <SideBar showSideBar={showSideBar} closeSideBar={() => setShowSideBar(false)} />
 
             <div className="w-full flex min-w-fit flex-col gap-y-5 items-center bg-backgroud-color">
                 <div className='w-full min-h-screen gap-y-5 flex flex-col items-center'>
-                    <TopBar showSearch={props.showSearch ? true : false} open={open} onOpen={() => setOpen(!open)} />
+                    <TopBar showSearch={props.showSearch ? true : false} onSideBar={() => setShowSideBar(!showSideBar)} />
                     <div className="px-1 w-full sm:w-full md:w-[95%] lg:w-4/5 xl:w-8/12 2xl:w-3/5">
                         {props.children}
                     </div>

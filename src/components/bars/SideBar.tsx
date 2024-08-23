@@ -5,8 +5,8 @@ import { MouseEvent } from "react";
 import ButtonMenu from "./ButtonMenu";
 
 interface SideBarProps {
-    open: boolean
-    onclick: () => void;
+    showSideBar: boolean
+    closeSideBar: () => void;
 }
 
 export default function SideBar(props: SideBarProps) {
@@ -15,11 +15,11 @@ export default function SideBar(props: SideBarProps) {
 
     const handleInsideClick = (event: MouseEvent<HTMLDivElement>) => {
         if (refInside.current == event.target)
-            props.onclick()
+            props.closeSideBar()
     }
 
     return (
-        <div className={`${props.open ? 'visible' : 'invisible'} absolute z-50 w-full h-full flex`}  >
+        <div className={`${props.showSideBar ? 'visible' : 'invisible'} absolute z-50 w-full h-full flex`}  >
             <div
                 ref={refInside}
                 className='
@@ -30,7 +30,7 @@ export default function SideBar(props: SideBarProps) {
                 onClick={handleInsideClick}
             >
                 <aside className={
-                    `${props.open ? 'w-[50%] sm:w-[50%] md:w-[25%]' : 'w-0'} 
+                    `${props.showSideBar ? 'w-[50%] sm:w-[50%] md:w-[25%]' : 'w-0'} 
                     h-fit transition ease-linear 
                     min-w-fit px-2
                     cursor-default

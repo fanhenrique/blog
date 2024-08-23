@@ -1,15 +1,13 @@
 // internal import
 import ButtonMenu from "./ButtonMenu"
 import Search from "../Search"
-import OpenMenu from "./OpenMenu";
+import OpenSideBar from "./OpenSideBar";
 import useScreenSize from "../hooks/useScreenSize";
 import Title from "./Title";
 
-
 interface TopBarProps {
-    open: boolean;
-    onOpen: () => void;
     showSearch: boolean;
+    onSideBar: () => void;
 }
 
 export default function TopBar(props: TopBarProps) {
@@ -21,12 +19,10 @@ export default function TopBar(props: TopBarProps) {
             {screenSize.width < 1024 ?
                 <>
                     <div className="w-full flex">
-                        <OpenMenu className='grow w-2/5' onclick={props.onOpen} />
-
+                        <OpenSideBar className='grow w-2/5' onClick={props.onSideBar} />
                         <div className='grow-0 w-1/5 '>
                             <Title />
                         </div>
-
                         <div className="grow-0 w-2/5">
                             {props.showSearch ? <Search /> : null}
                         </div>
@@ -38,7 +34,6 @@ export default function TopBar(props: TopBarProps) {
                     <div className='w-2/6 justify-start flex'>
                         <Title />
                     </div>
-
                     <div className="w-3/6 gap-x-5 lg:gap-x-10 flex justify-center">
                         <ButtonMenu navigate="/">Home</ButtonMenu>
                         <ButtonMenu navigate="/about">Sobre</ButtonMenu>
