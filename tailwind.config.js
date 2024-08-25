@@ -1,8 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-
-import markdownPlugin from './src/components/markdownPlugin'
-import colors from 'tailwindcss/colors'
-
 export default {
   content: [
     "./index.html",
@@ -11,7 +7,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        colors: colors,
         'primary-color': '#0D80BF',
         'secondary-color': '#161B22',
         'backgroud-color': '#0F0F0F'
@@ -21,8 +16,6 @@ export default {
       }
     },
   },
-  plugins: [
-    markdownPlugin
-  ],
+  plugins: [],
 }
 
