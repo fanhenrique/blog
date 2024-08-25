@@ -9,8 +9,8 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // internal imports
 import Layout from '../components/Layout'
-import CodeCopyButton from '../components/CodeCopyButton'
 import Comments from '../components/Comments';
+import Pre from '../components/markdown/Pre';
 import HeaderPost from '../components/HeaderPost';
 
 export interface AttributesPostInteface {
@@ -66,16 +66,6 @@ export default function Post() {
 
     }, []);
 
-    const Pre = ({ children }: any) => <div
-        className="
-            flex p-1
-            justify-between
-            bg-backgroud-color 
-        ">
-        {children}
-        <CodeCopyButton>{children}</CodeCopyButton>
-    </div>
-
     return (
 
         <Layout>
@@ -84,7 +74,7 @@ export default function Post() {
                     <HeaderPost authors={post?.attributes.authors} date={post?.attributes.date} />
                     <Markdown
                         children={post?.markdown}
-                        className='markdown flex flex-col gap-y-3 text-justify'
+                        className='flex flex-col'
                         skipHtml={false}
                         remarkPlugins={[remarkGfm,  // support GFM (GitHub flavored markdown) - (autolink literals, footnotes, strikethrough, tables, tasklists).
                             [remarkRehype, { footnoteLabel: ' ', footnoteLabelTagName: 'div' }]] // plugin remark que transforma markdown em HTML para dar suporte ao rehype.
