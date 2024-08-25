@@ -9,8 +9,8 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // internal imports
 import Layout from '../components/Layout'
-import Comments from '../components/Comments';
 import Pre from '../components/markdown/Pre';
+import Comments from '../components/markdown/Comments';
 import HeaderPost from '../components/HeaderPost';
 
 export interface AttributesPostInteface {
