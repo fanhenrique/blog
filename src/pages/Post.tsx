@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
+import remarkRehype from 'remark-rehype';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -85,8 +86,12 @@ export default function Post() {
                         children={post?.markdown}
                         className='markdown flex flex-col gap-y-3 text-justify'
                         skipHtml={false}
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeRaw]}
+                        remarkPlugins={[remarkGfm,  // support GFM (GitHub flavored markdown) - (autolink literals, footnotes, strikethrough, tables, tasklists).
+                            [remarkRehype, { footnoteLabel: ' ', footnoteLabelTagName: 'div' }]] // plugin remark que transforma markdown em HTML para dar suporte ao rehype.
+                        }
+                        rehypePlugins={[rehypeRaw]} // support HTML This plugin passes each node and embedded raw HTML 
+                        // through an HTML parser (parse5), to recreate a tree exactly as how 
+                        // a browser would parse it, while keeping the original data and positional info intact.
                         components={{
                             pre: Pre,
                             code(props: any) {
