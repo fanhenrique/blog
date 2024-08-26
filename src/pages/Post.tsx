@@ -4,14 +4,13 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import remarkRehype from 'remark-rehype';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // internal imports
 import Layout from '../components/Layout'
 import Pre from '../components/markdown/Pre';
 import Comments from '../components/markdown/Comments';
 import HeaderPost from '../components/HeaderPost';
+import Code from '../components/markdown/Code';
 
 export interface AttributesPostInteface {
     id: number,
@@ -118,6 +117,7 @@ export default function Post() {
                                     </code>
                                 )
                             }
+                            code: Code,
                         }}
                     />
                 </div>
