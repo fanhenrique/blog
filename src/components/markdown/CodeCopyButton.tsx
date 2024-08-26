@@ -21,7 +21,7 @@ export default function CodeCopyButton({ children }: CodeCopyButtonProps) {
     return (
         <button
             className='
-                flex
+                flex h-fit
                 text-right
                 text-gray-200
                 hover:text-primary-color 
