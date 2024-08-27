@@ -16,7 +16,6 @@ export default function Code(props: HTMLAttributes<HTMLElement>) {
         }
     }
 
-
     if (match) {
         return (
             <SyntaxHighlighter
@@ -43,12 +42,12 @@ export default function Code(props: HTMLAttributes<HTMLElement>) {
         return (
             <code
                 className='
-                    text-gray-200 
-                    font-semibold
-                    text-lg
-                    text-left
-                    whitespace-normal  
-                    '
+                    text-gray-200 font-semibold 
+                    text-lg text-left
+                    bg-backgroud-color
+                    whitespace-normal
+                    p-1 rounded-md
+                '
             >
                 {children}
             </code>
