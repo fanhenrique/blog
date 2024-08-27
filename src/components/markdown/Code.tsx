@@ -1,59 +1,36 @@
 import { HTMLAttributes } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+// internal imports
+import Command from './Command';
+import LanguageSyntax from './LanguageSyntax';
+import CodeCopyButton from './CodeCopyButton';
 
 export default function Code(props: HTMLAttributes<HTMLElement>) {
 
-    const { children, className } = props
+    const match = /language-(\w+)/.exec(props.className || '')
 
-    const match = /language-(\w+)/.exec(className || '')
-
-    let minWidthEm = ''
-    if (children) {
-        if (children instanceof String) {
-            const lineCount = children.split('\n').length;
-            minWidthEm = `${lineCount.toString().length * 0.8}em`;
-        }
-    }
-
-    if (match) {
-        return (
-            <SyntaxHighlighter
-                PreTag='pre'
-                children={String(children).replace(/\n$/, '')}
-                language={match[1]}
-                style={okaidia}
-                showLineNumbers={true}
-                lineNumberStyle={{
-                    paddingRight: '8px',
-                    minWidth: minWidthEm,
-                }}
-                customStyle={{
-                    background: '#0F0F0F',
-                    padding: '0px',
-                    paddingBottom: '15px',
-                    margin: '0px',
-                    borderRadius: '0px',
-                    overflowY: 'hidden',
-                }}
-            />
-        )
-    } else {
-        return (
-            <code
-                className='
-                    text-gray-200 font-semibold 
-                    text-lg text-left
-                    bg-backgroud-color
-                    whitespace-normal
-                    p-1 rounded-md
-                '
-            >
-                {children}
-            </code>
-        )
-    }
-
-
-
+    return (
+        <>
+            {match ?
+                <div className="w-full flex p-2 justify-between bg-backgroud-color">
+                    {match[1] === 'command' ?
+                        <Command>{props.children}</Command> : <LanguageSyntax language={match[1]}>{props.children}</LanguageSyntax>
+                    }
+                    <CodeCopyButton>{props.children}</CodeCopyButton>
+                </div>
+                :
+                <code
+                    className='
+                        w-fit inline
+                        text-gray-200 font-semibold 
+                        text-lg text-left
+                        bg-backgroud-color
+                        py-0.5 px-1.5 rounded-md
+                    '
+                >
+                    {props.children}
+                </code>
+            }
+        </ >
+    )
 }
