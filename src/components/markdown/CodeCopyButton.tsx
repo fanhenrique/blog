@@ -4,15 +4,12 @@ interface CodeCopyButtonProps {
     children: ReactNode;
 }
 
-export default function CodeCopyButton({ children }: CodeCopyButtonProps) {
+export default function CodeCopyButton(props: CodeCopyButtonProps) {
 
     const [copied, setCopied] = useState<string | null>(null);
 
     const handleCopy = (code: string) => {
-
-        const codeText = (children as React.ReactElement).props.children;
-
-        navigator.clipboard.writeText(codeText).then(() => {
+        navigator.clipboard.writeText(code).then(() => {
             setCopied(code);
             setTimeout(() => setCopied(null), 2000);
         });
@@ -26,8 +23,8 @@ export default function CodeCopyButton({ children }: CodeCopyButtonProps) {
                 text-gray-200
                 hover:text-primary-color 
                 font-bold'
-            onClick={() => handleCopy(String(children))}>
-            {copied === String(children) ? 'Copied!' : 'Copy'}
+            onClick={() => handleCopy(String(props.children))}>
+            {copied === String(props.children) ? 'Copied!' : 'Copy'}
         </button>
     );
 }
