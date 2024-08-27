@@ -73,7 +73,7 @@ export default function Post() {
                     <HeaderPost authors={post?.attributes.authors} date={post?.attributes.date} />
                     <Markdown
                         children={post?.markdown}
-                        className='flex flex-col'
+                        className='w-full flex flex-col gap-y-10'
                         skipHtml={false}
                         remarkPlugins={[remarkGfm,  // support GFM (GitHub flavored markdown) - (autolink literals, footnotes, strikethrough, tables, tasklists).
                             [remarkRehype, { footnoteLabel: ' ', footnoteLabelTagName: 'div' }]] // plugin remark que transforma markdown em HTML para dar suporte ao rehype.
@@ -83,40 +83,6 @@ export default function Post() {
                         // a browser would parse it, while keeping the original data and positional info intact.
                         components={{
                             pre: Pre,
-                            code(props: any) {
-                                const { children, className } = props
-
-                                const match = /language-(\w+)/.exec(className || '')
-
-                                const lineCount = children.split('\n').length;
-                                const minWidthEm = `${lineCount.toString().length * 0.8}em`;
-
-                                return match ? (
-                                    <SyntaxHighlighter
-                                        PreTag='pre'
-                                        children={String(children).replace(/\n$/, '')}
-                                        language={match[1]}
-                                        style={okaidia}
-                                        showLineNumbers={true}
-                                        lineNumberStyle={{
-                                            paddingRight: '8px',
-                                            minWidth: minWidthEm,
-                                        }}
-                                        customStyle={{
-                                            background: '#0F0F0F',
-                                            padding: '0px',
-                                            paddingBottom: '15px',
-                                            margin: '0px',
-                                            borderRadius: '0px',
-                                            overflowY: 'hidden',
-                                        }}
-                                    />
-                                ) : (
-                                    <code className='markdown-code'>
-                                        {children}
-                                    </code>
-                                )
-                            }
                             code: Code,
                         }}
                     />
