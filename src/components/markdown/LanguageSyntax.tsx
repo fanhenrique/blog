@@ -14,7 +14,6 @@ export default function LanguageSyntax(props: LanguageSyntaxProps) {
         const lineCount = String(props.children).split('\n').length;
         minWidthEm = `${lineCount.toString().length * 0.9}em`;
     }
-    console.log(minWidthEm)
 
     return (
         <SyntaxHighlighter
