@@ -5,14 +5,14 @@ export default function Blockquote(props: BlockquoteHTMLAttributes<HTMLQuoteElem
     return (
         <blockquote
             className="
-                h-fit p-4 my-5
+                h-fit p-2 my-5
                 border-primary-color
                 border-l-4
                 bg-gray-800
             "
             {...props}
         >
-            <div className="-mb-4">
+            <div className="-mb-5">
                 {props.children}
             </div>
         </blockquote>
