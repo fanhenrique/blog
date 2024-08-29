@@ -12,7 +12,7 @@ export default function Code(props: HTMLAttributes<HTMLElement>) {
     return (
         <>
             {match ?
-                <div className="w-full flex p-2 justify-between bg-backgroud-color">
+                <div className="w-full flex p-2 justify-between bg-backgroud-color my-5">
                     {match[1] === 'command' ?
                         <Command>{props.children}</Command> : <LanguageSyntax language={match[1]}>{props.children}</LanguageSyntax>
                     }
