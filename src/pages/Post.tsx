@@ -10,6 +10,7 @@ import Layout from '../components/Layout'
 import Comments from '../components/markdown/Comments';
 import HeaderPost from '../components/markdown/HeaderPost';
 import Hr from '../components/markdown/Hr';
+import Paragraph from '../components/markdown/Paragraph';
 import Blockquote from '../components/markdown/Blockquote';
 import Code from '../components/markdown/Code';
 
@@ -83,6 +84,7 @@ export default function Post() {
                     // a browser would parse it, while keeping the original data and positional info intact.
                     components={{
                         hr: Hr,
+                        p: Paragraph,
                         blockquote: Blockquote,
                         code: Code,
                     }}
