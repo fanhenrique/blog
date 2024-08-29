@@ -8,7 +8,7 @@ import remarkRehype from 'remark-rehype';
 // internal imports
 import Layout from '../components/Layout'
 import Comments from '../components/markdown/Comments';
-import HeaderPost from '../components/HeaderPost';
+import HeaderPost from '../components/markdown/HeaderPost';
 import Hr from '../components/markdown/Hr';
 import Code from '../components/markdown/Code';
 
