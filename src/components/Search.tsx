@@ -21,7 +21,6 @@ export default function Search(props: SearchProps) {
             <div className='flex items-center relative'>
                 <MagnifyingGlass className='absolute pl-1 pointer-events-none' size={26} weight="bold" color={colors.gray[500]} />
                 <input
-                    {...props}
                     ref={context?.inputRef}
                     type='text'
                     name='search'
@@ -36,8 +35,9 @@ export default function Search(props: SearchProps) {
                         focus:outline
                         focus:outline-1
                         focus:border-primary-color
-                        `}
+                    `}
                     placeholder='Pesquisar'
+                    {...props}
                 />
             </div>
         </div>
