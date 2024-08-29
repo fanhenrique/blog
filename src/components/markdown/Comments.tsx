@@ -6,7 +6,7 @@ import Hr from "./Hr";
 export default function Comments() {
 
     return (
-        <div className='w-full flex flex-col gap-y-3'>
+        <div className='w-full flex flex-col gap-y-3 mt-10'>
             <div className='w-full flex flex-col'>
                 <span className='text-3xl text-gray-200 font-black'>
                     Comentários
