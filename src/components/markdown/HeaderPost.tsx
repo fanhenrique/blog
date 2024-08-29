@@ -1,5 +1,6 @@
 //internal imports
-import ListAuthors from "./ListAuthors"
+import ListAuthors from "../ListAuthors"
+import Hr from "./Hr"
 
 interface HeaderPostProps {
     authors: string[] | undefined
@@ -16,7 +17,7 @@ export default function HeaderPost(props: HeaderPostProps) {
                     {props.date?.toLocaleDateString("pt-BR")}
                 </span>
             </div>
-            <hr className='h-0.5 bg-gray-700 border-0' />
+            <Hr />
         </div>
     )
 }
