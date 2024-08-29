@@ -9,6 +9,7 @@ import remarkRehype from 'remark-rehype';
 import Layout from '../components/Layout'
 import Comments from '../components/markdown/Comments';
 import HeaderPost from '../components/HeaderPost';
+import Hr from '../components/markdown/Hr';
 import Code from '../components/markdown/Code';
 
 export interface AttributesPostInteface {
@@ -80,6 +81,7 @@ export default function Post() {
                     // through an HTML parser (parse5), to recreate a tree exactly as how 
                     // a browser would parse it, while keeping the original data and positional info intact.
                     components={{
+                        hr: Hr,
                         code: Code,
                     }}
                 />
