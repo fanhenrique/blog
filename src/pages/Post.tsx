@@ -9,6 +9,7 @@ import remarkRehype from 'remark-rehype';
 import Layout from '../components/Layout'
 import Comments from '../components/markdown/Comments';
 import HeaderPost from '../components/markdown/HeaderPost';
+import Heading1 from '../components/markdown/Heading1';
 import Hr from '../components/markdown/Hr';
 import Paragraph from '../components/markdown/Paragraph';
 import Blockquote from '../components/markdown/Blockquote';
@@ -83,6 +84,7 @@ export default function Post() {
                     // through an HTML parser (parse5), to recreate a tree exactly as how 
                     // a browser would parse it, while keeping the original data and positional info intact.
                     components={{
+                        h1: Heading1,
                         hr: Hr,
                         p: Paragraph,
                         blockquote: Blockquote,
