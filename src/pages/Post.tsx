@@ -12,6 +12,7 @@ import HeaderPost from '../components/markdown/HeaderPost';
 import Heading1 from '../components/markdown/Heading1';
 import Heading2 from '../components/markdown/Heading2';
 import Heading3 from '../components/markdown/Heading3';
+import Heading4 from '../components/markdown/Heading4';
 import Hr from '../components/markdown/Hr';
 import Paragraph from '../components/markdown/Paragraph';
 import Blockquote from '../components/markdown/Blockquote';
@@ -89,6 +90,7 @@ export default function Post() {
                         h1: Heading1,
                         h2: Heading2,
                         h3: Heading3,
+                        h4: Heading4,
                         hr: Hr,
                         p: Paragraph,
                         blockquote: Blockquote,
