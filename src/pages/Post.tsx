@@ -17,6 +17,7 @@ import Heading5 from '../components/markdown/Heading5';
 import Heading6 from '../components/markdown/Heading6';
 import Hr from '../components/markdown/Hr';
 import Paragraph from '../components/markdown/Paragraph';
+import Anchor from '../components/markdown/Anchor';
 import Blockquote from '../components/markdown/Blockquote';
 import Code from '../components/markdown/Code';
 
@@ -102,6 +103,7 @@ export default function Post() {
                         hr: Hr,
                         p: Paragraph,
                         blockquote: Blockquote,
+                        a: Anchor,
                         code: Code,
                     }}
                 />
