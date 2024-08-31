@@ -9,7 +9,8 @@ export default {
       colors: {
         'primary-color': '#0D80BF',
         'secondary-color': '#161B22',
-        'backgroud-color': '#0F0F0F'
+        'backgroud-color': '#0F0F0F',
+        'assistant-color': '#074c72',
       },
       boxShadow: {
         's': '10px 10px 10px -2px rgba(0, 0, 0, 0.3)',
