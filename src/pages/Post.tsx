@@ -80,10 +80,14 @@ export default function Post() {
                 <HeaderPost authors={post?.attributes.authors} date={post?.attributes.date} />
                 <Markdown
                     children={post?.markdown}
-                    className='w-full'
+                    className='markdown w-full'
                     skipHtml={false}
                     remarkPlugins={[remarkGfm,  // support GFM (GitHub flavored markdown) - (autolink literals, footnotes, strikethrough, tables, tasklists).
-                        [remarkRehype, { footnoteLabel: ' ', footnoteLabelTagName: 'div' }]] // plugin remark que transforma markdown em HTML para dar suporte ao rehype.
+                        [remarkRehype, { // plugin remark que transforma markdown em HTML para dar suporte ao rehype.
+                            footnoteLabel: ' ',
+                            footnoteLabelTagName: 'div',
+                        }]
+                    ]
                     }
                     rehypePlugins={[rehypeRaw]} // support HTML This plugin passes each node and embedded raw HTML 
                     // through an HTML parser (parse5), to recreate a tree exactly as how 
