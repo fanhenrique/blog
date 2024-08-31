@@ -20,6 +20,7 @@ import Paragraph from '../components/markdown/Paragraph';
 import Anchor from '../components/markdown/Anchor';
 import Blockquote from '../components/markdown/Blockquote';
 import Code from '../components/markdown/Code';
+import Cite from '../components/markdown/Cite';
 
 export interface AttributesPostInteface {
     id: number,
@@ -103,6 +104,7 @@ export default function Post() {
                         hr: Hr,
                         p: Paragraph,
                         blockquote: Blockquote,
+                        sup: Cite,
                         a: Anchor,
                         code: Code,
                     }}
