@@ -3,7 +3,7 @@ import { useState } from "react";
 
 // internal imports
 import { AttributesPostInteface } from "../../pages/Post"
-import ListAuthors from "../ListAuthors";
+import AuthorsList from "./AuthorsList";
 import TagList from "./TagList";
 
 export default function PostCard(props: AttributesPostInteface) {
@@ -43,9 +43,9 @@ export default function PostCard(props: AttributesPostInteface) {
                         {props.date.toLocaleDateString("pt-BR")}
                     </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <ListAuthors authors={props.authors} />
-                </div>
+
+                <AuthorsList authors={props.authors} />
+
             </div>
 
             <hr className="h-px bg-gray-700 border-0 " />

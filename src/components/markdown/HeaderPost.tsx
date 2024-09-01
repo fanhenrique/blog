@@ -1,5 +1,5 @@
 //internal imports
-import ListAuthors from "../ListAuthors"
+import AuthorsList from "../cards/AuthorsList"
 import Hr from "./Hr"
 
 interface HeaderPostProps {
@@ -12,7 +12,7 @@ export default function HeaderPost(props: HeaderPostProps) {
     return (
         <div className='w-full flex flex-col'>
             <div className='w-full flex justify-between text-gray-200'>
-                <ListAuthors authors={props.authors} />
+                <AuthorsList authors={props.authors} />
                 <span className='text-nowrap text-gray-200'>
                     {props.date?.toLocaleDateString("pt-BR")}
                 </span>

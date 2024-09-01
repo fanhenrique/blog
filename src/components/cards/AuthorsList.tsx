@@ -1,8 +1,8 @@
-interface propsListAuthors {
+interface AuthorsListProps {
     authors: string[] | undefined
 }
 
-export default function ListAuthors(props: propsListAuthors) {
+export default function AuthorsList(props: AuthorsListProps) {
     return (
         <div className="flex">
             <span>Autor{props.authors ? props.authors.length > 1 ? 'es' : '' : <></>}:&nbsp;</span>
