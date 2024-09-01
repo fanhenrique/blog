@@ -43,38 +43,31 @@ export default function Post() {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const [post, setPost] = useState<PostInterface | undefined>(undefined)
+    const [post, setPost] = useState<PostInterface | null>(null)
 
-    useEffect(() => {
-
-        const modules = import.meta.glob<PostInterface>('../../posts/*.md');
+    // Load post from url path
+    const loadModules = async (modules: Record<string, () => Promise<PostInterface>>) => {
 
         let validPost = false
-        const loadModules = async () => {
 
-            for (const path in modules) {
-                const module = await modules[path]();
-                if (module.attributes.slug == location.pathname.split('/')[2]) {
-                    setPost({
-                        markdown: module.markdown,
-                        attributes: {
-                            ...module.attributes,
-                            date: new Date(module.attributes.date),
-                        },
-                    });
-
-                    validPost = true
-                    break
-                }
+        for (const path in modules) {
+            const module = await modules[path]();
+            if (module.attributes.slug == location.pathname.split('/')[2]) {
+                setPost({
+                    markdown: module.markdown,
+                    attributes: {
+                        ...module.attributes,
+                        date: new Date(module.attributes.date),
+                    },
+                });
+                validPost = true; break
             }
+        }
+        if (!validPost) navigate('/')
+    };
 
-            if (!validPost)
-                navigate('/')
-
-        };
-
-        loadModules();
-
+    useEffect(() => {
+        loadModules(import.meta.glob<PostInterface>('../../posts/*.md'));
     }, []);
 
     return (
