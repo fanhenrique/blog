@@ -21,6 +21,7 @@ import Anchor from '../components/markdown/Anchor';
 import Blockquote from '../components/markdown/Blockquote';
 import Code from '../components/markdown/Code';
 import Cite from '../components/markdown/Cite';
+import Ul from '../components/markdown/Ul';
 
 export interface AttributesPostInteface {
     id: number,
@@ -107,6 +108,7 @@ export default function Post() {
                         sup: Cite,
                         a: Anchor,
                         code: Code,
+                        ul: Ul,
                     }}
                 />
                 <Comments />
