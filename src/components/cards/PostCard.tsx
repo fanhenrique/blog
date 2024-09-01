@@ -4,6 +4,7 @@ import { useState } from "react";
 // internal imports
 import { AttributesPostInteface } from "../../pages/Post"
 import ListAuthors from "../ListAuthors";
+import TagList from "./TagList";
 
 export default function PostCard(props: AttributesPostInteface) {
 
@@ -49,26 +50,8 @@ export default function PostCard(props: AttributesPostInteface) {
 
             <hr className="h-px bg-gray-700 border-0 " />
 
-            <div className="flex flex-row items-end justify-between pt-2">
-                <div className="flex flex-row flex-wrap gap-1 text-primary-color">
-                    {props.tags.map((tag: string, i: number) => {
-                        return (
-                            <span key={tag + i} className="
-                                    hover:bg-primary-color
-                                    hover:text-gray-200
-                                    hover:cursor-pointer
-                                    text-nowrap
-                                    py-1 px-2 text-base
-                                    font-semibold
-                                    rounded-lg"
-                            >
-                                {tag}
-                            </span>
-                        )
-                    })}
-                </div>
+            <TagList tags={props.tags} />
 
-            </div>
         </div >
 
     )
