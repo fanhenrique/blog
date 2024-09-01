@@ -22,6 +22,7 @@ import Blockquote from '../components/markdown/Blockquote';
 import Code from '../components/markdown/Code';
 import Cite from '../components/markdown/Cite';
 import Ul from '../components/markdown/Ul';
+import Ol from '../components/markdown/Ol';
 
 export interface AttributesPostInteface {
     id: number,
@@ -109,6 +110,7 @@ export default function Post() {
                         a: Anchor,
                         code: Code,
                         ul: Ul,
+                        ol: Ol,
                     }}
                 />
                 <Comments />
