@@ -7,8 +7,8 @@ import remarkRehype from 'remark-rehype';
 
 // internal imports
 import Layout from '../components/Layout'
-import Comments from '../components/markdown/Comments';
-import HeaderPost from '../components/markdown/HeaderPost';
+import Comments from '../components/post/Comments';
+import HeaderPost from '../components/post/HeaderPost';
 import Heading1 from '../components/markdown/Heading1';
 import Heading2 from '../components/markdown/Heading2';
 import Heading3 from '../components/markdown/Heading3';
@@ -71,7 +71,6 @@ export default function Post() {
     }, []);
 
     return (
-
         <Layout>
             <div className='w-full bg-secondary-color p-4'>
                 <HeaderPost authors={post?.attributes.authors} date={post?.attributes.date} />
