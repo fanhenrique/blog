@@ -1,6 +1,6 @@
 //internal imports
 import AuthorsList from "../cards/AuthorsList"
-import Hr from "./Hr"
+import Hr from "../markdown/Hr"
 
 interface HeaderPostProps {
     authors: string[] | undefined

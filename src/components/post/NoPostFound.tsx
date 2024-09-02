@@ -1,5 +1,5 @@
 // Internal imports
-import CleanSearch from "./CleanSearch";
+import CleanSearch from "../CleanSearch";
 
 export default function NoPostFound() {
 
