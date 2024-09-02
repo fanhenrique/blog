@@ -24,6 +24,7 @@ export default function Search(props: SearchProps) {
                     ref={context?.inputRef}
                     type='text'
                     name='search'
+                    value={context?.inputValue}
                     onChange={handleInputChange}
                     className={`
                         h-9 w-full
