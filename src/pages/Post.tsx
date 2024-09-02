@@ -20,6 +20,7 @@ import Paragraph from '../components/markdown/Paragraph';
 import Anchor from '../components/markdown/Anchor';
 import Blockquote from '../components/markdown/Blockquote';
 import Code from '../components/markdown/Code';
+import Image from '../components/markdown/Image';
 import Cite from '../components/markdown/Cite';
 import Ul from '../components/markdown/Ul';
 import Ol from '../components/markdown/Ol';
@@ -101,6 +102,7 @@ export default function Post() {
                         sup: Cite,
                         a: Anchor,
                         code: Code,
+                        img: Image,
                         ul: Ul,
                         ol: Ol,
                     }}
