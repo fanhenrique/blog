@@ -1,5 +1,5 @@
 // internal import
-import ButtonMenu from "./ButtonMenu"
+import Button from "./Button"
 import Search from "../Search"
 import OpenSideBar from "./OpenSideBar";
 import useScreenSize from "../hooks/useScreenSize";
@@ -35,10 +35,10 @@ export default function TopBar(props: TopBarProps) {
                         <Title />
                     </div>
                     <div className="w-3/6 gap-x-5 lg:gap-x-10 flex justify-center">
-                        <ButtonMenu navigate="/">Home</ButtonMenu>
-                        <ButtonMenu navigate="/about">Sobre</ButtonMenu>
-                        <ButtonMenu navigate="/authors">Autores</ButtonMenu>
-                        <ButtonMenu navigate="/contact">Contato</ButtonMenu>
+                        <Button navigate="/">Home</Button>
+                        <Button navigate="/about">Sobre</Button>
+                        <Button navigate="/authors">Autores</Button>
+                        <Button navigate="/contact">Contato</Button>
                     </div>
 
                     <div className="w-2/6 flex justify-end">

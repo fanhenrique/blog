@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { MouseEvent } from "react";
 
 //interl imports 
-import ButtonMenu from "./ButtonMenu";
+import Button from "./Button";
 
 interface SideBarProps {
     showSideBar: boolean
@@ -37,10 +37,10 @@ export default function SideBar(props: SideBarProps) {
                     bg-secondary-color`}
                 >
                     <div className='w-full flex flex-col divide-y divide-gray-700'>
-                        <ButtonMenu navigate='/'>Home</ButtonMenu>
-                        <ButtonMenu navigate='/about'>Sobre</ButtonMenu>
-                        <ButtonMenu navigate='/authors'>Autores</ButtonMenu>
-                        <ButtonMenu navigate='/contact'>Contato</ButtonMenu>
+                        <Button navigate='/'>Home</Button>
+                        <Button navigate='/about'>Sobre</Button>
+                        <Button navigate='/authors'>Autores</Button>
+                        <Button navigate='/contact'>Contato</Button>
                     </div>
                 </aside >
             </div>
