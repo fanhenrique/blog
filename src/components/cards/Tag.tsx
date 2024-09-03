@@ -1,4 +1,5 @@
 import { HTMLAttributes, useContext } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 // Internal imports
 import { RefContext } from "../RefProvider"
@@ -9,7 +10,18 @@ interface TagProps extends HTMLAttributes<HTMLSpanElement> {
 
 export default function Tag(props: TagProps) {
 
+    const location = useLocation()
+    const navigate = useNavigate()
     const context = useContext(RefContext)
+
+    const handleClick = () => {
+        if (location.pathname != '/') {
+            context?.setInputValue(props.children)
+            navigate('/')
+        } else {
+            context?.setInputValue(props.children)
+        }
+    }
 
     return (
         <button
@@ -21,7 +33,7 @@ export default function Tag(props: TagProps) {
                 font-semibold
                 rounded-lg
             "
-            onClick={() => { context?.setInputValue(props.children) }}
+            onClick={handleClick}
             {...props}
         >
             {props.children}
