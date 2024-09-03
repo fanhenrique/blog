@@ -8,7 +8,7 @@ interface TagListProps {
 export default function TagList(props: TagListProps) {
 
     return (
-        <div className="flex flex-row flex-wrap gap-x-1.5 pt-2  text-primary-color">
+        <div className="flex flex-row flex-wrap gap-x-1.5 pt-2 ">
             {props.tags.map((tag: string, i: number) => {
                 return (
                     <Tag key={tag + i}>{tag}</Tag>

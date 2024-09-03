@@ -26,6 +26,7 @@ export default function Tag(props: TagProps) {
     return (
         <button
             className="
+                text-primary-color
                 hover:bg-primary-color
                 hover:text-gray-200
                 text-nowrap
