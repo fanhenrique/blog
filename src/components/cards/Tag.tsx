@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 // Internal imports
 import { RefContext } from "../RefProvider"
 
-interface TagProps extends HTMLAttributes<HTMLSpanElement> {
+interface TagProps extends HTMLAttributes<HTMLButtonElement> {
     children: string
 }
 
@@ -25,7 +25,8 @@ export default function Tag(props: TagProps) {
 
     return (
         <button
-            className="
+            {...props}
+            className={`
                 text-primary-color
                 hover:bg-primary-color
                 hover:text-gray-200
@@ -33,9 +34,9 @@ export default function Tag(props: TagProps) {
                 py-0.5 px-1 text-base
                 font-semibold
                 rounded-lg
-            "
+                ${props.className}
+            `}
             onClick={handleClick}
-            {...props}
         >
             {props.children}
         </button>
