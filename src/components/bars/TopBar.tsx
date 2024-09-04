@@ -38,7 +38,6 @@ export default function TopBar(props: TopBarProps) {
                         <Button navigate="/">Home</Button>
                         <Button navigate="/about">Sobre</Button>
                         <Button navigate="/authors">Autores</Button>
-                        <Button navigate="/contact">Contato</Button>
                     </div>
 
                     <div className="w-2/6 flex justify-end">

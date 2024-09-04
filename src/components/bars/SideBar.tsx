@@ -40,7 +40,6 @@ export default function SideBar(props: SideBarProps) {
                         <Button navigate='/'>Home</Button>
                         <Button navigate='/about'>Sobre</Button>
                         <Button navigate='/authors'>Autores</Button>
-                        <Button navigate='/contact'>Contato</Button>
                     </div>
                 </aside >
             </div>
