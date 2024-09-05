@@ -20,7 +20,7 @@ export default function PostCard(props: AttributesPostInteface) {
         >
             <div className="flex flex-col gap-y-8">
 
-                <div className="flex justify-between">
+                <div className="w-full flex justify-between">
                     <CardTitle
                         over={over}
                         onMouseOver={() => { setOver(true) }}
@@ -30,7 +30,7 @@ export default function PostCard(props: AttributesPostInteface) {
                         {props.title}
                     </CardTitle>
 
-                    <span className="text-nowrap text-gray-200">
+                    <span className="w-fit h-fit text-nowrap text-gray-200">
                         {props.date.toLocaleDateString("pt-BR")}
                     </span>
                 </div>
