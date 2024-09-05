@@ -1,44 +1,35 @@
-import { useNavigate } from "react-router-dom"
 import { useState } from "react";
 
 // internal imports
 import { AttributesPostInteface } from "../../pages/Post"
 import AuthorsList from "./AuthorsList";
 import TagList from "./TagList";
+import CardTitle from "./CardTitle";
 
 export default function PostCard(props: AttributesPostInteface) {
 
-    const navigate = useNavigate()
-    const [over, setHover] = useState(false)
+    const [over, setOver] = useState(false)
 
     return (
-
         <div className={`
-            flex flex-col p-2
+            flex flex-col p-2 gap-y-2
             text-gray-200 
             bg-secondary-color 
             shadow-s
             ${over ? 'scale-[103%]' : ''}`}
         >
-            <div
-                className="flex flex-col gap-y-4 cursor-pointer pb-2"
-                onMouseOver={() => { setHover(true) }}
-                onMouseOut={() => { setHover(false) }}
-                onClick={() => navigate(`/post/${props.slug}`)}
-            >
+            <div className="flex flex-col gap-y-8">
 
                 <div className="flex justify-between">
-                    <h1 className=
-                        {`    
-                            w-fit text-2xl md:text-3xl lg:text-5xl  xl:text-5xl 
-                            font-semibold 
-                            text-left
-                            cursor-pointer
-                            ${over ? 'text-primary-color' : 'text-gray-200'}
-                        `}
+                    <CardTitle
+                        over={over}
+                        onMouseOver={() => { setOver(true) }}
+                        onMouseOut={() => { setOver(false) }}
+                        navigate={`/post/${props.slug}`}
                     >
                         {props.title}
-                    </h1>
+                    </CardTitle>
+
                     <span className="text-nowrap text-gray-200">
                         {props.date.toLocaleDateString("pt-BR")}
                     </span>
