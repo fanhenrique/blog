@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 // internal imports
 import Layout from '../components/Layout'
 import Comments from '../components/post/Comments';
-import HeaderPost from '../components/post/HeaderPost';
+import HeaderPost from '../components/post/PostHeader';
 import CustomMarkdown from '../components/markdown/CustomMarkdown';
 
 export interface AttributesPostInteface {
