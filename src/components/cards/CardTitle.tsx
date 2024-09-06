@@ -15,7 +15,7 @@ export default function CardTitle(props: CardTitleProps) {
 
     return (
         <h1 className={`    
-            w-fit text-2xl md:text-3xl lg:text-5xl  xl:text-5xl 
+            w-fit h-fit text-2xl md:text-3xl lg:text-5xl xl:text-5xl 
             font-semibold 
             text-left
             capitalize
