@@ -12,7 +12,7 @@ interface ResultsProps {
 export default function Results(props: ResultsProps) {
 
     return (
-        <div className='flex flex-col gap-y-5'>
+        <>
             <CleanSearch />
             {props.results.map((r: FuseResult<PostInterface>, i: number) => {
                 return (
@@ -22,6 +22,6 @@ export default function Results(props: ResultsProps) {
                     />
                 )
             })}
-        </div>
+        </>
     )
 }

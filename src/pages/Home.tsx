@@ -73,12 +73,14 @@ export default function Home() {
 
     return (
         <Layout showSearch>
-            {results.length > 0 ?
-                <Results results={results} /> :
-                context && context?.inputValue.length <= 0 ?
-                    <AllPosts posts={posts} /> :
-                    <NoPostFound />
-            }
+            <div className='flex flex-col gap-y-5'>
+                {results.length > 0 ?
+                    <Results results={results} /> :
+                    context && context?.inputValue.length <= 0 ?
+                        <AllPosts posts={posts} /> :
+                        <NoPostFound />
+                }
+            </div>
         </Layout >
     )
 }

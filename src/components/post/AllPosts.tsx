@@ -10,7 +10,7 @@ interface AllPostsProps {
 export default function AllPosts(props: AllPostsProps) {
 
     return (
-        <div className='flex flex-col gap-y-5'>
+        <>
             <Span>Posts</Span>
             {props.posts.map((post: PostInterface, i: number) => {
                 return (
@@ -20,6 +20,6 @@ export default function AllPosts(props: AllPostsProps) {
                     />
                 )
             })}
-        </div>
+        </>
     )
 }
