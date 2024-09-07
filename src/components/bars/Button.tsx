@@ -1,5 +1,8 @@
-import { useLocation, useNavigate } from "react-router-dom"
-import { ButtonHTMLAttributes } from "react"
+import { useNavigate } from "react-router-dom"
+import { ButtonHTMLAttributes, useContext } from "react"
+
+// Internal imports
+import { RefContext } from "../RefProvider"
 
 export interface ButtonMenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     navigate: string
@@ -8,12 +11,17 @@ export interface ButtonMenuProps extends ButtonHTMLAttributes<HTMLButtonElement>
 export default function ButtonMenu(props: ButtonMenuProps) {
 
     const navigate = useNavigate()
-    const location = useLocation()
+    const context = useContext(RefContext);
+
+    const redirect = () => {
+        context?.setInputValue('')
+        navigate(props.navigate)
+    }
 
     return (
         <div className="w-full h-20 justify-center flex place-items-center">
             <button
-                onClick={() => { props.navigate == location.pathname ? navigate(0) : navigate(props.navigate) }}
+                onClick={redirect}
                 className="
                     h-fit w-fit 
                     text-xl text-gray-200 font-semibold
