@@ -6,9 +6,8 @@ import TagList from "./TagList"
 import CardTitle from "./CardTitle"
 import Card from "./Card"
 import Hr from "../markdown/Hr"
-import ButtonSearch from "../ButtonSearch"
+import SearchByAuthor from "./SearchByAuthor"
 import colors from "tailwindcss/colors"
-
 
 export default function AuthorCard(props: AuthorsAttributesInterface) {
 
@@ -43,20 +42,7 @@ export default function AuthorCard(props: AuthorsAttributesInterface) {
                                 {props.author}
                             </CardTitle>
                             <div className="w-full flex justify-end">
-                                <ButtonSearch
-                                    search={props.author}
-                                    className="
-                                    w-fit
-                                    text-gray-200
-                                    hover:text-primary-color
-                                    cursor-pointer
-                                    hover:underline 
-                                    underline-offset-2
-                                    font-semibold 
-                                "
-                                >
-                                    Postagens do autor
-                                </ButtonSearch>
+                                <SearchByAuthor search={props.author} />
                             </div>
                         </div>
                     </div>

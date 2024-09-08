@@ -6,7 +6,7 @@ import { RefContext } from "./RefProvider"
 
 interface ButtonSearchProps extends HTMLAttributes<HTMLButtonElement> {
     children: string
-    search: string
+    search: string | undefined
 }
 
 export default function ButtonSearch(props: ButtonSearchProps) {
