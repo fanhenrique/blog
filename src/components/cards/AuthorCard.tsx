@@ -47,6 +47,7 @@ export default function AuthorCard(props: AuthorsAttributesInterface) {
                                     search={props.author}
                                     className="
                                     w-fit
+                                    text-gray-200
                                     hover:text-primary-color
                                     cursor-pointer
                                     hover:underline 

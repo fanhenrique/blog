@@ -12,6 +12,7 @@ export default function GoAuthorPage(props: GoAuthorPageProps) {
     return (
         <button
             className="
+                text-gray-200
                 hover:text-primary-color
                 cursor-pointer
                 hover:underline 

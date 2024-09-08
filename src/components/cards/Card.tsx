@@ -8,7 +8,6 @@ export default function Card(props: CardProps) {
     return (
         <div className={`
             flex flex-col p-2 gap-y-2
-            text-gray-200
             bg-secondary-color
             shadow-s
             ${props.over ? 'scale-[102%]' : ''}`}
