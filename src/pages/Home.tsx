@@ -56,7 +56,6 @@ export default function Home() {
         setPost(loadedModules)
     }
 
-
     useEffect(() => {
         loadModules(import.meta.glob<PostInterface>('../../posts/*.md'))
     }, [])
@@ -76,7 +75,7 @@ export default function Home() {
             <div className='flex flex-col gap-y-5'>
                 {results.length > 0 ?
                     <Results results={results} /> :
-                    context && context?.inputValue.length <= 0 ?
+                    context?.inputValue !== undefined && context?.inputValue?.length <= 0 ?
                         <AllPosts posts={posts} /> :
                         <NoPostFound />
                 }
