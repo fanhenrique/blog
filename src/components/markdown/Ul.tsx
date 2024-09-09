@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 
-export default function (props: HTMLAttributes<HTMLUListElement>) {
+export default function Ul(props: HTMLAttributes<HTMLUListElement>) {
     return (
         <ul
             className="

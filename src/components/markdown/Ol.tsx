@@ -1,6 +1,6 @@
 import { OlHTMLAttributes } from "react";
 
-export default function (props: OlHTMLAttributes<HTMLOListElement>) {
+export default function Ol(props: OlHTMLAttributes<HTMLOListElement>) {
 
     return (
         <ol
