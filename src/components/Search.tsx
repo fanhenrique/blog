@@ -5,9 +5,7 @@ import colors from "tailwindcss/colors";
 // internal imports
 import { RefContext } from "./RefProvider";
 
-export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> { }
-
-export default function Search(props: SearchProps) {
+export default function Search(props: InputHTMLAttributes<HTMLInputElement>) {
 
     const context = useContext(RefContext);
 
