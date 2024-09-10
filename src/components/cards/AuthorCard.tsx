@@ -1,13 +1,13 @@
 import { useState } from "react"
-import { UserCircle } from "@phosphor-icons/react"
 
+// Internal imports
 import { AuthorsAttributesInterface } from "../../pages/Author"
 import TagList from "./TagList"
 import CardTitle from "./CardTitle"
 import Card from "./Card"
 import Hr from "../markdown/Hr"
 import SearchByAuthor from "./SearchByAuthor"
-import colors from "tailwindcss/colors"
+import AuthorImage from "./AuthorImage"
 
 export default function AuthorCard(props: AuthorsAttributesInterface) {
 
@@ -20,16 +20,12 @@ export default function AuthorCard(props: AuthorsAttributesInterface) {
 
                     <div className="flex gap-x-4">
                         <div className="w-1/5">
-                            {props.foto ?
-                                <img className="w-full rounded-full" src={props.foto} />
-                                :
-                                <UserCircle
-                                    className="size-full"
-                                    viewBox="25 25 205 205"
-                                    color={colors.gray[700]}
-                                    weight="thin"
-                                />
-                            }
+                            <AuthorImage
+                                image={props.image}
+                                onMouseOver={() => { setOver(true) }}
+                                onMouseOut={() => { setOver(false) }}
+                                navigate={`/author/${props.slug}`}
+                            />
                         </div>
                         <div className="w-full flex flex-col justify-between">
                             <CardTitle
