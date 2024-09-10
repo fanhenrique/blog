@@ -19,7 +19,7 @@ export default function SideBar(props: SideBarProps) {
     }
 
     return (
-        <div className={`${props.showSideBar ? 'visible' : 'invisible'} absolute z-50 w-full h-full flex`}  >
+        <div className={`${props.showSideBar ? 'visible' : 'invisible'} fixed z-50 w-full h-full flex`}  >
             <div
                 ref={refInside}
                 className='
