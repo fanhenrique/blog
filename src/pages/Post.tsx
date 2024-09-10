@@ -28,37 +28,38 @@ export default function Post() {
 
     const [post, setPost] = useState<PostInterface | null>(null)
 
-    // Load post from url path
-    const loadModule = async (modules: Record<string, () => Promise<PostInterface>>) => {
-
-        let validPost = false
-
-        for (const path in modules) {
-
-            const markdown = await modules[path]()
-                .then((module: PostInterface) => {
-                    return ({
-                        markdown: module.markdown,
-                        attributes: {
-                            ...module.attributes,
-                            date: new Date(module.attributes.date),
-                        },
-                    })
-                })
-                .catch(error => console.error(error))
-
-            if (markdown && markdown.attributes.slug == location.pathname.split('/')[2]) {
-                setPost(markdown)
-                validPost = true; break
-            }
-        }
-        if (!validPost) navigate('/')
-    }
-
-
     useEffect(() => {
+
+        // Load post from url path
+        const loadModule = async (modules: Record<string, () => Promise<PostInterface>>) => {
+
+            let validPost = false
+
+            for (const path in modules) {
+
+                const markdown = await modules[path]()
+                    .then((module: PostInterface) => {
+                        return ({
+                            markdown: module.markdown,
+                            attributes: {
+                                ...module.attributes,
+                                date: new Date(module.attributes.date),
+                            },
+                        })
+                    })
+                    .catch(error => console.error(error))
+
+                if (markdown && markdown.attributes.slug == location.pathname.split('/')[2]) {
+                    setPost(markdown)
+                    validPost = true; break
+                }
+            }
+            if (!validPost) navigate('/')
+        }
+
         loadModule(import.meta.glob<PostInterface>('../../posts/*.md'));
-    }, []);
+
+    }, [location.pathname, navigate]);
 
     return (
         <Layout>

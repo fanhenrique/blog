@@ -25,26 +25,29 @@ export default function Author() {
     const navigate = useNavigate()
     const [author, setAuthor] = useState<AuthorsInterface>()
 
-    const loadModules = async (modules: Record<string, () => Promise<AuthorsInterface>>) => {
-
-        let validAuthor = false
-
-        for (const path in modules) {
-            const author = await modules[path]()
-                .then(module => { return module })
-                .catch(error => console.error(error))
-
-            if (author && author.attributes.slug == location.pathname.split('/')[2]) {
-                setAuthor(author)
-                validAuthor = true; break
-            }
-        }
-        if (!validAuthor) navigate('/authors')
-    }
-
     useEffect(() => {
-        loadModules(import.meta.glob<AuthorsInterface>('../../authors/*.md'))
-    }, []);
+
+        // Load author from url path
+        const loadModule = async (modules: Record<string, () => Promise<AuthorsInterface>>) => {
+
+            let validAuthor = false
+
+            for (const path in modules) {
+                const author = await modules[path]()
+                    .then(module => { return module })
+                    .catch(error => console.error(error))
+
+                if (author && author.attributes.slug == location.pathname.split('/')[2]) {
+                    setAuthor(author)
+                    validAuthor = true; break
+                }
+            }
+            if (!validAuthor) navigate('/authors')
+        }
+
+        loadModule(import.meta.glob<AuthorsInterface>('../../authors/*.md'))
+
+    }, [navigate]);
 
     return (
         <Layout>
