@@ -38,9 +38,12 @@ export default function Authors() {
         <Layout>
             <div className="flex flex-col gap-y-5">
                 <Span>Autores</Span>
-                {authors.map((author: AuthorsInterface) => {
+                {authors.map((author: AuthorsInterface, i: number) => {
                     return (
-                        <AuthorCard {...author.attributes} />
+                        <AuthorCard
+                            key={author.attributes.author + i}
+                            {...author.attributes}
+                        />
                     )
                 })}
             </div>
