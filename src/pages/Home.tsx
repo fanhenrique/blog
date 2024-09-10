@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import Fuse, { FuseResult } from 'fuse.js';
 
 // Internal imports
@@ -16,16 +16,18 @@ export default function Home() {
     const [posts, setPost] = useState<PostInterface[]>([])
     const [results, setResults] = useState<FuseResult<PostInterface>[]>([])
 
-    const fuse = new Fuse(posts, {
-        threshold: 0.3,
-        ignoreLocation: true,
-        keys: [
-            'attributes.title',
-            'attributes.authors',
-            'attributes.tags',
-            'markdown',
-        ]
-    })
+    const fuse = useMemo(() => {
+        return new Fuse(posts, {
+            threshold: 0.3,
+            ignoreLocation: true,
+            keys: [
+                'attributes.title',
+                'attributes.authors',
+                'attributes.tags',
+                'markdown',
+            ]
+        })
+    }, [posts])
 
     // Loads and sorts all posts
     const loadModules = async (modules: Record<string, () => Promise<PostInterface>>) => {
@@ -68,7 +70,7 @@ export default function Home() {
         else
             setResults([])
 
-    }, [context?.inputValue, posts])
+    }, [context?.inputValue, fuse])
 
     return (
         <Layout showSearch>
