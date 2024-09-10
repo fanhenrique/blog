@@ -37,9 +37,9 @@ export default function SideBar(props: SideBarProps) {
                     bg-secondary-color`}
                 >
                     <div className='w-full flex flex-col divide-y divide-gray-700'>
-                        <Button navigate='/'>Home</Button>
-                        <Button navigate='/about'>Sobre</Button>
-                        <Button navigate='/authors'>Autores</Button>
+                        <Button navigate='/' closeSideBar={props.closeSideBar}>Home</Button>
+                        <Button navigate='/about' closeSideBar={props.closeSideBar}>Sobre</Button>
+                        <Button navigate='/authors' closeSideBar={props.closeSideBar}>Autores</Button>
                     </div>
                 </aside >
             </div>

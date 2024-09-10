@@ -6,6 +6,7 @@ import { RefContext } from "../RefProvider"
 
 export interface ButtonMenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     navigate: string
+    closeSideBar: () => void;
 }
 
 export default function ButtonMenu(props: ButtonMenuProps) {
@@ -15,6 +16,7 @@ export default function ButtonMenu(props: ButtonMenuProps) {
 
     const redirect = () => {
         context?.setInputValue('')
+        props.closeSideBar()
         navigate(props.navigate)
     }
 
