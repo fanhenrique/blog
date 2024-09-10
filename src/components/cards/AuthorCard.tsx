@@ -12,7 +12,6 @@ import colors from "tailwindcss/colors"
 export default function AuthorCard(props: AuthorsAttributesInterface) {
 
     const [over, setOver] = useState(false)
-    console.log(props.foto)
 
     return (
         <Card over={over}>
