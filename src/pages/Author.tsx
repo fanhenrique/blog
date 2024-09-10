@@ -11,7 +11,7 @@ export interface AuthorsAttributesInterface {
     id: number,
     author: string,
     slug: string,
-    foto: string
+    image: string
     tags: string[]
 }
 
