@@ -10,7 +10,7 @@ export default function Heading1(props: HTMLAttributes<HTMLHeadingElement>) {
                 text-gray-200
                 font-black
                 capitalize
-                mt-10 mb-8
+                my-7
             "
             {...props}
         >
