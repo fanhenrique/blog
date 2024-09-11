@@ -2,11 +2,11 @@ import { useRef } from "react";
 import { MouseEvent } from "react";
 
 //interl imports 
-import Button from "./Button";
+import SideBarButton from "./SideBarButton";
 
 interface SideBarProps {
     showSideBar: boolean
-    closeSideBar: () => void;
+    onSideBar: () => void
 }
 
 export default function SideBar(props: SideBarProps) {
@@ -15,7 +15,7 @@ export default function SideBar(props: SideBarProps) {
 
     const handleInsideClick = (event: MouseEvent<HTMLDivElement>) => {
         if (refInside.current == event.target)
-            props.closeSideBar()
+            props.onSideBar()
     }
 
     return (
@@ -37,9 +37,9 @@ export default function SideBar(props: SideBarProps) {
                     bg-secondary-color`}
                 >
                     <div className='w-full flex flex-col divide-y divide-gray-700'>
-                        <Button navigate='/' closeSideBar={props.closeSideBar}>Home</Button>
-                        <Button navigate='/about' closeSideBar={props.closeSideBar}>Sobre</Button>
-                        <Button navigate='/authors' closeSideBar={props.closeSideBar}>Autores</Button>
+                        <SideBarButton navigate='/' closeSideBar={props.onSideBar} >Home</SideBarButton>
+                        <SideBarButton navigate='/about' closeSideBar={props.onSideBar} >Sobre</SideBarButton>
+                        <SideBarButton navigate='/authors' closeSideBar={props.onSideBar} >Autores</SideBarButton>
                     </div>
                 </aside >
             </div>
