@@ -62,15 +62,35 @@ export default function Home() {
         loadModules(import.meta.glob<PostInterface>('../../posts/*.md'))
     }, [])
 
+
+    const promiseSearch: Promise<FuseResult<PostInterface>[]> = useMemo(() => {
+
+        return new Promise((resolve, reject) => {
+
+            if (context?.inputValue)
+                resolve(fuse.search(context.inputValue))
+            else
+                resolve([])
+
+            reject(Error('Error in search'))
+        })
+
+    }, [context?.inputValue, fuse])
+
+
     // Search posts through the context of the search bar
     useEffect(() => {
 
-        if (context?.inputValue)
-            setResults(fuse.search(context.inputValue))
-        else
-            setResults([])
+        const search = async () => {
+            await promiseSearch
+                .then(resolve => {
+                    setResults(resolve)
+                })
+                .catch(error => console.error(error))
+        }
+        search()
 
-    }, [context?.inputValue, fuse])
+    }, [context?.inputValue, promiseSearch])
 
     return (
         <Layout showSearch>
