@@ -6,7 +6,7 @@ import useScreenSize from "../hooks/useScreenSize";
 import Title from "./Title";
 
 interface TopBarProps {
-    showSearch: boolean;
+    showSearch: boolean | undefined;
     onSideBar: () => void;
 }
 
@@ -24,7 +24,7 @@ export default function TopBar(props: TopBarProps) {
                             <Title />
                         </div>
                         <div className="grow-0 w-2/5">
-                            {props.showSearch ? <Search /> : null}
+                            {props.showSearch ? <Search /> : <></>}
                         </div>
                     </div>
 
@@ -42,7 +42,7 @@ export default function TopBar(props: TopBarProps) {
 
                     <div className="w-2/6 flex justify-end">
                         <div className="w-4/5">
-                            {props.showSearch ? <Search /> : null}
+                            {props.showSearch ? <Search /> : <></>}
                         </div>
                     </div>
 

@@ -17,11 +17,14 @@ export default function Layout(props: LayoutProps) {
     return (
         <div className="relative">
 
-            <SideBar showSideBar={showSideBar} closeSideBar={() => setShowSideBar(false)} />
+            <SideBar showSideBar={showSideBar} onSideBar={() => setShowSideBar(!showSideBar)} />
 
             <div className="w-full flex min-w-fit flex-col gap-y-5 items-center bg-backgroud-color">
                 <div className='w-full min-h-screen gap-y-5 flex flex-col items-center'>
-                    <TopBar showSearch={props.showSearch ? true : false} onSideBar={() => setShowSideBar(!showSideBar)} />
+                    <TopBar
+                        showSearch={props.showSearch}
+                        onSideBar={() => setShowSideBar(!showSideBar)}
+                    />
                     <div className="px-1 md:px-0 w-full sm:w-full md:w-[95%] lg:w-4/5 xl:w-8/12 2xl:w-3/5">
                         {props.children}
                     </div>
