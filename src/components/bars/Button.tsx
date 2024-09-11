@@ -4,12 +4,12 @@ import { ButtonHTMLAttributes, useContext } from "react"
 // Internal imports
 import { RefContext } from "../RefProvider"
 
-export interface ButtonMenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     navigate: string
     closeSideBar: () => void;
 }
 
-export default function ButtonMenu(props: ButtonMenuProps) {
+export default function Button(props: ButtonProps) {
 
     const navigate = useNavigate()
     const context = useContext(RefContext);
