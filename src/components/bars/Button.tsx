@@ -19,10 +19,9 @@ export default function Button(props: ButtonProps) {
     }
 
     return (
-        <div className="w-full h-20 justify-center flex place-items-center">
-            <button
-                onClick={redirect}
-                className="
+        <button
+            onClick={redirect}
+            className="
                     h-fit w-fit 
                     text-xl text-gray-200 font-semibold
                     outline-none 
@@ -30,10 +29,9 @@ export default function Button(props: ButtonProps) {
                     decoration-primary-color
                     decoration-4 underline-offset-4
                 "
-                {...props}
-            >
-                {props.children}
-            </button>
-        </div>
+            {...props}
+        >
+            {props.children}
+        </button>
     )
 }

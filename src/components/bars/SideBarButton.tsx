@@ -22,11 +22,13 @@ export default function SideBarButton(props: SideBarButtonProps) {
     }
 
     return (
-        <Button
-            navigate={props.navigate}
-            onClick={redirect}
-        >
-            {props.children}
-        </Button>
+        <div className="h-20 flex items-center justify-center">
+            <Button
+                navigate={props.navigate}
+                onClick={redirect}
+            >
+                {props.children}
+            </Button>
+        </div>
     )
 }
