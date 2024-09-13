@@ -36,7 +36,6 @@ export default function TopBar(props: TopBarProps) {
                     </div>
                     <div className="w-3/6 gap-x-5 lg:gap-x-10 flex justify-center">
                         <Button navigate="/">Home</Button>
-                        <Button navigate="/about">Sobre</Button>
                         <Button navigate="/authors">Autores</Button>
                     </div>
 

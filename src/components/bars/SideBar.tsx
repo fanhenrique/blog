@@ -38,7 +38,6 @@ export default function SideBar(props: SideBarProps) {
                 >
                     <div className='w-full flex flex-col divide-y divide-gray-700'>
                         <SideBarButton navigate='/' closeSideBar={props.onSideBar} >Home</SideBarButton>
-                        <SideBarButton navigate='/about' closeSideBar={props.onSideBar} >Sobre</SideBarButton>
                         <SideBarButton navigate='/authors' closeSideBar={props.onSideBar} >Autores</SideBarButton>
                     </div>
                 </aside >
