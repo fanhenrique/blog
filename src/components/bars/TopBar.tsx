@@ -31,16 +31,16 @@ export default function TopBar(props: TopBarProps) {
                 </>
                 :
                 <>
-                    <div className='w-2/6 justify-start flex'>
+                    <div className='w-1/3 flex justify-start'>
                         <Title />
                     </div>
-                    <div className="w-3/6 gap-x-5 lg:gap-x-10 flex justify-center">
+                    <div className="w-1/3 lg:gap-x-28 flex justify-center">
                         <Button navigate="/">Home</Button>
                         <Button navigate="/authors">Autores</Button>
                     </div>
 
-                    <div className="w-2/6 flex justify-end">
-                        <div className="w-4/5">
+                    <div className="w-1/3 flex justify-end">
+                        <div className="w-full lg:w-3/4">
                             {props.showSearch ? <Search /> : <></>}
                         </div>
                     </div>
