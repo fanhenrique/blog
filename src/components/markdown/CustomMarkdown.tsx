@@ -18,12 +18,11 @@ import Ol from "./Ol";
 import Code from "./Code";
 import Anchor from "./Anchor";
 import Paragraph from "./Paragraph";
-import Image from "./Image";
-
 
 interface CustomMarkdownProps {
     children: string | undefined
 }
+
 export default function CustomMarkdown(props: CustomMarkdownProps) {
 
     return (
@@ -54,7 +53,6 @@ export default function CustomMarkdown(props: CustomMarkdownProps) {
                 sup: Cite,
                 a: Anchor,
                 code: Code,
-                img: Image,
                 ul: Ul,
                 ol: Ol,
             }}
