@@ -32,8 +32,9 @@ export default function CustomMarkdown(props: CustomMarkdownProps) {
             skipHtml={false}
             remarkPlugins={[remarkGfm,  // support GFM (GitHub flavored markdown) - (autolink literals, footnotes, strikethrough, tables, tasklists).
                 [remarkRehype, { // plugin remark que transforma markdown em HTML para dar suporte ao rehype.
-                    footnoteLabel: ' ',
-                    footnoteLabelTagName: 'div',
+                    footnoteLabel: 'Referências',
+                    footnoteLabelTagName: 'h2',
+                    footnoteLabelProperties: ' ',
                 }]
             ]
             }

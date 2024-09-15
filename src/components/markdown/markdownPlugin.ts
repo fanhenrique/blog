@@ -24,6 +24,14 @@ export default plugin(({ addComponents, theme }) => {
             '[data-footnote-ref]::after': {
                 content: "']'",
             },
+            '.footnotes': {
+                ol: {
+                    paddingLeft: theme('spacing.5'), // alternative to the bug listStylePosition: 'inside'
+                    'li p': {
+                        margin: theme('spacing.0'),
+                    },
+                },
+            },
         }
 
     });
