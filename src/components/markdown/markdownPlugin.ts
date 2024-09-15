@@ -18,6 +18,12 @@ export default plugin(({ addComponents, theme }) => {
                     textUnderlineOffset: theme('spacing[0.5]'),
                 },
             },
+            '[data-footnote-ref]::before': {
+                content: "'['",
+            },
+            '[data-footnote-ref]::after': {
+                content: "']'",
+            },
         }
 
     });
