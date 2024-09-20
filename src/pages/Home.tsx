@@ -1,69 +1,96 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
-import Fuse, { FuseResult } from 'fuse.js';
+import Fuse, { FuseResult } from 'fuse.js'
+import YAML from 'yaml'
 
 // Internal imports
 import Layout from '../components/Layout'
-import { PostInterface } from './Post'
-import { RefContext } from '../components/RefProvider';
-import Results from '../components/post/Results';
-import NoPostFound from '../components/post/NoPostFound';
-import AllPosts from '../components/post/AllPosts';
+import { RefContext } from '../components/RefProvider'
+import Results from '../components/post/Results'
+import NoPostFound from '../components/post/NoPostFound'
+import AllPosts from '../components/post/AllPosts'
+
+export interface MetadataI {
+    id: number,
+    title: string,
+    tags: string[],
+    slug: string,
+    path: string,
+    authors: string[],
+    date: Date,
+}
+
+export interface PostI {
+    metadata: MetadataI
+    html: string,
+}
 
 export default function Home() {
 
     const context = useContext(RefContext);
 
-    const [posts, setPost] = useState<PostInterface[]>([])
-    const [results, setResults] = useState<FuseResult<PostInterface>[]>([])
+    const [posts, setPosts] = useState<PostI[]>([])
+    const [results, setResults] = useState<FuseResult<PostI>[]>([])
 
     const fuse = useMemo(() => {
         return new Fuse(posts, {
             threshold: 0.3,
             ignoreLocation: true,
             keys: [
-                'attributes.title',
-                'attributes.authors',
-                'attributes.tags',
-                'markdown',
+                'metadata.title',
+                'metadata.authors',
+                'metadata.tags',
+                'html',
             ]
         })
     }, [posts])
 
-    // Loads and sorts all posts
-    const loadModules = async (modules: Record<string, () => Promise<PostInterface>>) => {
+    // Loads html
+    const loadHtml = async (path: string) => {
+        return await fetch(path)
+            .then(response => response.text())
+            .then(data => data)
+            .catch(err => console.error("Error loading markdown file", err))
+    }
 
-        const loadedModules: PostInterface[] = []
+    // Loads and sorts all posts
+    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataI>>) => {
+
+        const loadedModules: PostI[] = []
 
         for (const path in modules) {
 
-            const markdown = await modules[path]()
-                .then(module => {
-                    return ({
-                        markdown: module.markdown,
-                        attributes: {
-                            ...module.attributes,
-                            date: new Date(module.attributes.date),
-                        },
+            const module = await fetch(path)
+                .then(response => response.text())
+                .then(data => data)
+                .catch(err => console.error("Error loading yaml file", err))
+
+            if (module) {
+                const metadata = YAML.parse(module)
+                const html = await loadHtml(`../../posts/html/${metadata.path}`)
+                if (html) {
+                    loadedModules.push({
+                        html: html,
+                        metadata: {
+                            ...metadata,
+                            date: new Date(metadata.date)
+                        }
                     })
-                })
-                .catch(error => console.error(error))
+                }
+            }
 
-            if (markdown) loadedModules.push(markdown)
         }
-
-        loadedModules.sort((a: PostInterface, b: PostInterface) => {
-            return b.attributes.date.getTime() - a.attributes.date.getTime()
+        loadedModules.sort((a: PostI, b: PostI) => {
+            return b.metadata.date.getTime() - a.metadata.date.getTime()
         });
 
-        setPost(loadedModules)
+        setPosts(loadedModules)
     }
 
     useEffect(() => {
-        loadModules(import.meta.glob<PostInterface>('../../posts/*.md'))
+        loadMetadatas(import.meta.glob<MetadataI>('../../posts/metadata/*.yaml'));
     }, [])
 
-
-    const promiseSearch: Promise<FuseResult<PostInterface>[]> = useMemo(() => {
+    const promiseSearch: Promise<FuseResult<PostI>[]> = useMemo(() => {
 
         return new Promise((resolve, reject) => {
 
@@ -72,11 +99,10 @@ export default function Home() {
             else
                 resolve([])
 
-            reject(Error('Error in search'))
+            reject(Error('Error searching post'))
         })
 
     }, [context?.inputValue, fuse])
-
 
     // Search posts through the context of the search bar
     useEffect(() => {
