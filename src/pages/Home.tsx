@@ -49,7 +49,7 @@ export default function Home() {
         return await fetch(path)
             .then(response => response.text())
             .then(data => data)
-            .catch(err => console.error("Error loading markdown file", err))
+            .catch(err => console.error("Error loading HTML file", err))
     }
 
     // Loads and sorts all posts
@@ -62,7 +62,7 @@ export default function Home() {
             const module = await fetch(path)
                 .then(response => response.text())
                 .then(data => data)
-                .catch(err => console.error("Error loading yaml file", err))
+                .catch(err => console.error("Error loading YAML file", err))
 
             if (module) {
                 const metadata = YAML.parse(module)
