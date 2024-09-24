@@ -4,6 +4,7 @@ export default function Anchor(props: HTMLAttributes<HTMLAnchorElement>) {
 
     return (
         <a
+            {...props}
             className="
                 w-fit
                 text-sky-600
@@ -12,7 +13,6 @@ export default function Anchor(props: HTMLAttributes<HTMLAnchorElement>) {
                 underline-offset-2
                 cursor-pointer
             "
-            {...props}
         >
             {props.children}
         </a>
