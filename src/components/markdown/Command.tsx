@@ -15,7 +15,7 @@ export default function Command(props: HTMLAttributes<HTMLPreElement>) {
                     whitespace-pre-wrap
                 '
             >
-                {props.children}
+                <code>{props.children}</code>
             </pre>
             <CodeCopyButton>{props.children}</CodeCopyButton>
         </div>
