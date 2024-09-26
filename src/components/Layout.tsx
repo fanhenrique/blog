@@ -15,11 +15,11 @@ export default function Layout(props: LayoutProps) {
     const [showSideBar, setShowSideBar] = useState(false);
 
     return (
-        <div className="relative">
+        <div className="w-screen">
 
             <SideBar showSideBar={showSideBar} onSideBar={() => setShowSideBar(!showSideBar)} />
 
-            <div className="w-full flex min-w-fit flex-col gap-y-5 items-center bg-backgroud-color">
+            <div className="w-full flex flex-col gap-y-5 items-center bg-backgroud-color">
                 <div className='w-full min-h-screen gap-y-5 flex flex-col items-center'>
                     <TopBar
                         showSearch={props.showSearch}
