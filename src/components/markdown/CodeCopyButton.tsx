@@ -18,6 +18,9 @@ export default function CodeCopyButton(props: CodeCopyButtonProps) {
     return (
         <button
             className='
+                absolute
+                top-1
+                right-2
                 flex h-fit
                 text-right
                 text-gray-200
