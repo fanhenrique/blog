@@ -1,8 +1,8 @@
 import { HTMLAttributes } from "react";
 
-export default function FigCaption(props: HTMLAttributes<HTMLElement>){
+export default function FigureTitle(props: HTMLAttributes<HTMLElement>) {
     return (
-        <figcaption 
+        <figcaption
             className="
                 text-xl
                 capitalize
