@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import markdownPlugin from './src/components/markdown/markdownPlugin'
 export default {
   content: [
     "./index.html",
@@ -18,8 +17,6 @@ export default {
       }
     },
   },
-  plugins: [
-    markdownPlugin
-  ],
+  plugins: [],
 }
 
