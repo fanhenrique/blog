@@ -1,6 +1,6 @@
-import { HTMLAttributes } from "react";
+import { AnchorHTMLAttributes } from "react";
 
-export default function Anchor(props: HTMLAttributes<HTMLAnchorElement>) {
+export default function Anchor(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
 
     return (
         <a
