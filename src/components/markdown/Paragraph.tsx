@@ -6,7 +6,6 @@ export default function Paragraph(props: HTMLAttributes<HTMLParagraphElement>) {
         <p
             className="                
                 text-justify
-                text-lg
                 tracking-wide
                 leading-relaxed
                 mb-5
