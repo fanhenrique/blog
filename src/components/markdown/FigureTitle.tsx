@@ -6,7 +6,6 @@ export default function FigureTitle(props: HTMLAttributes<HTMLElement>) {
             className="
                 text-xl
                 capitalize
-                text-gray-200
                 font-semibold
             "
         >

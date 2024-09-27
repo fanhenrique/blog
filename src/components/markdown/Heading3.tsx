@@ -6,8 +6,7 @@ export default function Heading3(props: HTMLAttributes<HTMLHeadingElement>) {
     return (
         <h3
             className="
-                text-2xl 
-                text-gray-200
+                text-2xl
                 font-semibold
                 capitalize
                 mt-10

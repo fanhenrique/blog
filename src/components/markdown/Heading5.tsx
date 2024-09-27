@@ -7,7 +7,6 @@ export default function Heading5(props: HTMLAttributes<HTMLHeadingElement>) {
         <h5
             className="
                 text-xl
-                text-gray-200
                 font-semibold
                 capitalize
             "

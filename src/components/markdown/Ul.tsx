@@ -11,7 +11,6 @@ export default function Ul(props: HTMLAttributes<HTMLUListElement>) {
                 gap-y-5
                 list-disc
                 list-outside
-                text-gray-200
             "
         >
             {props.children}

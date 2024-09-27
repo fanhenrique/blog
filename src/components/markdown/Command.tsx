@@ -10,7 +10,7 @@ export default function Command(props: HTMLAttributes<HTMLPreElement>) {
             <pre
                 className="
                     w-fit max-w-full
-                    text-gray-200 font-semibold 
+                    font-semibold 
                     text-lg text-lef
                     whitespace-pre-wrap
                 "

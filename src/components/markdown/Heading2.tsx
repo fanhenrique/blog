@@ -10,8 +10,7 @@ export default function Heading2(props: HTMLAttributes<HTMLHeadingElement>) {
         <div className="mt-10 mb-1">
             <h2
                 className="
-                    text-3xl 
-                    text-gray-200
+                    text-3xl
                     font-semibold
                     capitalize
                 "

@@ -11,7 +11,6 @@ export default function Ol(props: OlHTMLAttributes<HTMLOListElement>) {
                 gap-y-5
                 list-decimal
                 list-outside
-                text-gray-200
             "
         >
             {props.children}

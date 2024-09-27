@@ -4,8 +4,7 @@ export default function Paragraph(props: HTMLAttributes<HTMLParagraphElement>) {
 
     return (
         <p
-            className="
-                text-gray-200
+            className="                
                 text-justify
                 text-lg
                 tracking-wide

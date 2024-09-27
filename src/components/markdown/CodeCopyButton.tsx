@@ -23,7 +23,6 @@ export default function CodeCopyButton(props: CodeCopyButtonProps) {
                 right-2
                 flex h-fit
                 text-right
-                text-gray-200
                 hover:text-primary-color 
                 font-bold'
             onClick={() => handleCopy(String(props.children))}>

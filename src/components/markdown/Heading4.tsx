@@ -6,8 +6,7 @@ export default function Heading4(props: HTMLAttributes<HTMLHeadingElement>) {
     return (
         <h4
             className="
-                text-2xl 
-                text-gray-200
+                text-2xl
                 font-semibold
                 capitalize
                 mt-1
