@@ -1,8 +1,8 @@
 import { HTMLAttributes } from "react";
 
-export default function(props: HTMLAttributes<HTMLElement>){
-    return(
-        <mark 
+export default function Mark(props: HTMLAttributes<HTMLElement>) {
+    return (
+        <mark
             className="
                 px-0.5
                 font-semibold
