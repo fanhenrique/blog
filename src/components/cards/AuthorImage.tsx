@@ -1,17 +1,14 @@
 import { UserCircle } from "@phosphor-icons/react";
-import { useNavigate } from "react-router-dom";
 import colors from "tailwindcss/colors";
 
 interface AuthorImageProps {
     image: string
-    navigate: string,
+    navigate: () => void,
     onMouseOver: () => void
     onMouseOut: () => void
 }
 
 export default function AuthorImage(props: AuthorImageProps) {
-
-    const navigate = useNavigate()
 
     return (
         props.image ?
@@ -20,7 +17,7 @@ export default function AuthorImage(props: AuthorImageProps) {
                 src={props.image}
                 onMouseOver={() => { props.onMouseOver() }}
                 onMouseOut={() => { props.onMouseOut() }}
-                onClick={() => navigate(props.navigate)}
+                onClick={() => props.navigate()}
             />
             :
             <UserCircle
@@ -30,7 +27,7 @@ export default function AuthorImage(props: AuthorImageProps) {
                 weight="thin"
                 onMouseOver={() => { props.onMouseOver() }}
                 onMouseOut={() => { props.onMouseOut() }}
-                onClick={() => navigate(props.navigate)}
+                onClick={() => props.navigate()}
             />
     )
 }
