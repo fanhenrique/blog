@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-// internal imports
-import { AttributesPostInteface } from "../../pages/Post"
+// Internal imports
 import AuthorsList from "./AuthorsList";
 import TagList from "./TagList";
 import CardTitle from "./CardTitle";
 import Card from "./Card";
 import Hr from "../markdown/Hr";
+import { PostI } from "../../pages/Home";
 
-export default function PostCard(props: AttributesPostInteface) {
+export default function PostCard(props: PostI) {
 
+    const navigate = useNavigate()
     const [over, setOver] = useState(false)
 
     return (
@@ -22,24 +24,25 @@ export default function PostCard(props: AttributesPostInteface) {
                             over={over}
                             onMouseOver={() => { setOver(true) }}
                             onMouseOut={() => { setOver(false) }}
-                            navigate={`/post/${props.slug}`}
+                            title={props.metadata.title}
+                            navigate={() => navigate(`/post/${props.metadata.slug}`, { state: props })}
                         >
-                            {props.title}
+                            {props.metadata.title}
                         </CardTitle>
 
                         <span className="w-fit h-fit text-gray-200">
-                            {props.date.toLocaleDateString("pt-BR")}
+                            {props.metadata.date.toLocaleDateString("pt-BR")}
                         </span>
                     </div>
 
-                    <AuthorsList authors={props.authors} />
+                    <AuthorsList authors={props.metadata.authors} />
 
                 </div>
 
                 <Hr />
 
-                <TagList tags={props.tags} />
+                <TagList tags={props.metadata.tags} />
             </>
-        </Card>
+        </Card >
     )
 }
