@@ -1,17 +1,14 @@
 import { HTMLAttributes } from "react"
-import { useNavigate } from "react-router-dom"
 
 interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
-    children: string
+    title: string
     over: boolean
-    navigate: string,
     onMouseOver: () => void
     onMouseOut: () => void
+    navigate: () => void
 }
 
 export default function CardTitle(props: CardTitleProps) {
-
-    const navigate = useNavigate()
 
     return (
         <h1 className={`    
@@ -22,11 +19,11 @@ export default function CardTitle(props: CardTitleProps) {
             cursor-pointer
             ${props.over ? 'text-primary-color' : 'text-gray-200'}
         `}
-            onMouseOver={() => { props.onMouseOver() }}
-            onMouseOut={() => { props.onMouseOut() }}
-            onClick={() => navigate(props.navigate)}
+            onMouseOver={() => props.onMouseOver()}
+            onMouseOut={() => props.onMouseOut()}
+            onClick={() => props.navigate()}
         >
-            {props.children}
-        </h1>
+            {props.title}
+        </h1 >
     )
 }
