@@ -1,16 +1,18 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 // Internal imports
-import { AuthorsAttributesInterface } from "../../pages/Author"
 import TagList from "./TagList"
 import CardTitle from "./CardTitle"
 import Card from "./Card"
 import Hr from "../markdown/Hr"
 import SearchByAuthor from "./SearchByAuthor"
 import AuthorImage from "./AuthorImage"
+import { AuthorI } from "../../pages/Authors"
 
-export default function AuthorCard(props: AuthorsAttributesInterface) {
+export default function AuthorCard(props: AuthorI) {
 
+    const navigate = useNavigate()
     const [over, setOver] = useState(false)
 
     return (
@@ -21,10 +23,10 @@ export default function AuthorCard(props: AuthorsAttributesInterface) {
                     <div className="flex gap-x-4">
                         <div className="w-1/5">
                             <AuthorImage
-                                image={props.image}
+                                image={props.metadata.image}
                                 onMouseOver={() => { setOver(true) }}
                                 onMouseOut={() => { setOver(false) }}
-                                navigate={`/author/${props.slug}`}
+                                navigate={() => navigate(`/author/${props.metadata.slug}`, { state: props })}
                             />
                         </div>
                         <div className="w-full flex flex-col justify-between">
@@ -32,12 +34,13 @@ export default function AuthorCard(props: AuthorsAttributesInterface) {
                                 over={over}
                                 onMouseOver={() => { setOver(true) }}
                                 onMouseOut={() => { setOver(false) }}
-                                navigate={`/author/${props.slug}`}
+                                title={props.metadata.author}
+                                navigate={() => navigate(`/author/${props.metadata.slug}`, { state: props })}
                             >
-                                {props.author}
+                                {props.metadata.author}
                             </CardTitle>
                             <div className="w-full flex justify-end">
-                                <SearchByAuthor search={props.author} />
+                                <SearchByAuthor search={props.metadata.author} />
                             </div>
                         </div>
                     </div>
@@ -46,7 +49,7 @@ export default function AuthorCard(props: AuthorsAttributesInterface) {
 
                 <Hr />
 
-                <TagList tags={props.tags} />
+                <TagList tags={props.metadata.tags} />
             </>
         </Card >
     )
