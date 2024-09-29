@@ -2,11 +2,11 @@ import { FuseResult } from "fuse.js"
 
 // Internal imports
 import CleanSearch from "../CleanSearch"
-import { PostInterface } from "../../pages/Post"
-import PostCard from "../cards/PostCard"
+import PostCard from "./PostCard"
+import { PostI } from "../../pages/Home"
 
 interface ResultsProps {
-    results: FuseResult<PostInterface>[]
+    results: FuseResult<PostI>[]
 }
 
 export default function Results(props: ResultsProps) {
@@ -14,11 +14,11 @@ export default function Results(props: ResultsProps) {
     return (
         <>
             <CleanSearch />
-            {props.results.map((r: FuseResult<PostInterface>, i: number) => {
+            {props.results.map((result: FuseResult<PostI>, i: number) => {
                 return (
                     <PostCard
-                        key={r.item.attributes.title + i}
-                        {...r.item.attributes}
+                        key={result.item.metadata.title + i}
+                        {...result.item}
                     />
                 )
             })}

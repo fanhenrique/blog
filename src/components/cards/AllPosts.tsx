@@ -1,10 +1,10 @@
 // Internal imports
-import { PostInterface } from "../../pages/Post"
-import PostCard from "../cards/PostCard"
+import { PostI } from "../../pages/Home"
+import PostCard from "./PostCard"
 import Span from "../Span"
 
 interface AllPostsProps {
-    posts: PostInterface[]
+    posts: PostI[]
 }
 
 export default function AllPosts(props: AllPostsProps) {
@@ -12,11 +12,11 @@ export default function AllPosts(props: AllPostsProps) {
     return (
         <>
             <Span>Posts</Span>
-            {props.posts.map((post: PostInterface, i: number) => {
+            {props.posts.map((post: PostI, i: number) => {
                 return (
                     <PostCard
-                        key={post.attributes.title + i}
-                        {...post.attributes}
+                        key={post.metadata.title + i}
+                        {...post}
                     />
                 )
             })}
