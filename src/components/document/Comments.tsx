@@ -1,7 +1,7 @@
 import Giscus from "@giscus/react";
 
 // internal imports
-import Hr from "../markdown/Hr";
+import Hr from "./Hr";
 
 export default function Comments() {
 
