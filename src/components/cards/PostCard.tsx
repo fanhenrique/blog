@@ -6,8 +6,8 @@ import AuthorsList from "./AuthorsList";
 import TagList from "./TagList";
 import CardTitle from "./CardTitle";
 import Card from "./Card";
-import Hr from "../markdown/Hr";
-import { PostI } from "../../pages/Home";
+import Hr from "../document/Hr";
+import { PostI } from "../../pages/Post";
 
 export default function PostCard(props: PostI) {
 
@@ -25,7 +25,7 @@ export default function PostCard(props: PostI) {
                             onMouseOver={() => { setOver(true) }}
                             onMouseOut={() => { setOver(false) }}
                             title={props.metadata.title}
-                            navigate={() => navigate(`/post/${props.metadata.slug}`, { state: props })}
+                            navigate={() => navigate(`/post/${props.metadata.slug}`)}
                         >
                             {props.metadata.title}
                         </CardTitle>
@@ -34,13 +34,9 @@ export default function PostCard(props: PostI) {
                             {props.metadata.date.toLocaleDateString("pt-BR")}
                         </span>
                     </div>
-
                     <AuthorsList authors={props.metadata.authors} />
-
                 </div>
-
                 <Hr />
-
                 <TagList tags={props.metadata.tags} />
             </>
         </Card >
