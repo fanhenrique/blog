@@ -1,29 +1,44 @@
 import { useEffect, useState } from "react";
+import YAML from 'yaml'
 
 // Internal imports
 import Layout from "../components/Layout"
 import AuthorCard from "../components/cards/AuthorCard";
-import { AuthorsInterface } from "./Author";
 import Span from "../components/Span";
+
+export interface MetadataAuthorI {
+    id: number,
+    author: string,
+    slug: string,
+    image: string
+    tags: string[]
+}
 
 export default function Authors() {
 
-    const [authors, setAuthors] = useState<AuthorsInterface[]>([])
+    const [authors, setAuthors] = useState<MetadataAuthorI[]>([])
 
-    const loadModules = async (modules: Record<string, () => Promise<AuthorsInterface>>) => {
-        const loadedModules: AuthorsInterface[] = []
+    // Loads and sorts all posts
+    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataAuthorI>>) => {
+
+        const loadedModules: MetadataAuthorI[] = []
 
         for (const path in modules) {
-            const author = await modules[path]()
-                .catch(module => { return module })
-                .catch(error => console.error(error))
 
-            if (author) loadedModules.push(author)
+            const module = await fetch(path)
+                .then(response => response.text())
+                .then(data => data)
+                .catch(err => console.error("Error loading YAML file", err))
+
+            if (module) {
+                const metadata = YAML.parse(module)
+                loadedModules.push({ ...metadata })
+            }
         }
 
-        loadedModules.sort((a: AuthorsInterface, b: AuthorsInterface) => {
-            if (b.attributes.author < a.attributes.author) return 1
-            if (b.attributes.author > a.attributes.author) return -1
+        loadedModules.sort((a: MetadataAuthorI, b: MetadataAuthorI) => {
+            if (b.author < a.author) return 1
+            if (b.author > a.author) return -1
             return 0
         });
 
@@ -31,18 +46,18 @@ export default function Authors() {
     }
 
     useEffect(() => {
-        loadModules(import.meta.glob<AuthorsInterface>('../../authors/*.md'))
-    }, []);
+        loadMetadatas(import.meta.glob<MetadataAuthorI>('../../authors/metadata/*.yaml'));
+    }, [])
 
     return (
         <Layout>
             <div className="flex flex-col gap-y-5">
                 <Span>Autores</Span>
-                {authors.map((author: AuthorsInterface, i: number) => {
+                {authors.map((author: MetadataAuthorI, i: number) => {
                     return (
                         <AuthorCard
-                            key={author.attributes.author + i}
-                            {...author.attributes}
+                            key={author.author + i}
+                            {...author}
                         />
                     )
                 })}
