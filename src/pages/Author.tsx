@@ -1,65 +1,74 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import YAML from 'yaml'
 
 // Internal imports
 import Layout from "../components/Layout";
-import CustomMarkdown from "../components/markdown/CustomMarkdown";
-import Hr from "../components/markdown/Hr";
+import Hr from "../components/document/Hr";
 import SearchByAuthor from "../components/cards/SearchByAuthor";
+import { MetadataAuthorI } from "./Authors";
+import Document from '../components/document/Document';
+import { loadHtml } from "./utils";
 
-export interface AuthorsAttributesInterface {
-    id: number,
-    author: string,
-    slug: string,
-    image: string
-    tags: string[]
-}
-
-export interface AuthorsInterface {
-    attributes: AuthorsAttributesInterface
-    markdown: string,
+export interface AuthorsI {
+    metadata: MetadataAuthorI
+    html: string,
 }
 
 export default function Author() {
 
+    const location = useLocation()
     const navigate = useNavigate()
-    const [author, setAuthor] = useState<AuthorsInterface>()
 
-    useEffect(() => {
+    const [author, setAuthor] = useState<AuthorsI>()
 
-        // Load author from url path
-        const loadModule = async (modules: Record<string, () => Promise<AuthorsInterface>>) => {
+    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataAuthorI>>) => {
 
-            let validAuthor = false
+        let validAuthor = false
 
-            for (const path in modules) {
-                const author = await modules[path]()
-                    .then(module => { return module })
-                    .catch(error => console.error(error))
+        for (const path in modules) {
 
-                if (author && author.attributes.slug == location.pathname.split('/')[2]) {
-                    setAuthor(author)
-                    validAuthor = true; break
+            const module = await fetch(path)
+                .then(response => response.text())
+                .then(data => data)
+                .catch(err => console.error("Error loading YAML file", err))
+
+            if (module) {
+                const metadata = YAML.parse(module)
+
+                if (metadata && metadata.slug == location.pathname.split('/')[2]) {
+
+                    const html = await loadHtml(`../../authors/html/${metadata.path}`)
+
+                    if (html) {
+                        setAuthor({
+                            html: html,
+                            metadata: { ...metadata }
+                        })
+                        validAuthor = true; break
+                    }
                 }
             }
-            if (!validAuthor) navigate('/authors')
+
         }
+        if (!validAuthor) navigate('/authors')
+    }
 
-        loadModule(import.meta.glob<AuthorsInterface>('../../authors/*.md'))
-
-    }, [navigate]);
+    useEffect(() => {
+        loadMetadatas(import.meta.glob<MetadataAuthorI>('../../authors/metadata/*.yaml'));
+    }, [])
 
     return (
         <Layout>
             <div className='w-full bg-secondary-color p-4'>
                 <div className="w-full flex flex-col gap-y-1">
                     <div className="w-full flex justify-end">
-                        <SearchByAuthor search={author?.attributes.author} />
+                        <SearchByAuthor search={author?.metadata.author} />
                     </div>
                     <Hr />
                 </div>
-                <CustomMarkdown>{author?.markdown}</CustomMarkdown>
+                <Document text={author?.html} />
             </div>
-        </Layout>
+        </Layout >
     )
 }
