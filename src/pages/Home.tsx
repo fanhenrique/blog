@@ -5,11 +5,13 @@ import YAML from 'yaml'
 // Internal imports
 import Layout from '../components/Layout'
 import { RefContext } from '../components/RefProvider'
-import Results from '../components/post/Results'
-import NoPostFound from '../components/post/NoPostFound'
-import AllPosts from '../components/post/AllPosts'
+import Results from '../components/cards/Results'
+import NoPostFound from '../components/cards/NoPostFound'
+import AllPosts from '../components/cards/AllPosts'
+import { PostI } from './Post'
+import { loadHtml } from './utils'
 
-export interface MetadataI {
+export interface MetadataPostI {
     id: number,
     title: string,
     tags: string[],
@@ -17,11 +19,6 @@ export interface MetadataI {
     path: string,
     authors: string[],
     date: Date,
-}
-
-export interface PostI {
-    metadata: MetadataI
-    html: string,
 }
 
 export default function Home() {
@@ -44,16 +41,8 @@ export default function Home() {
         })
     }, [posts])
 
-    // Loads html
-    const loadHtml = async (path: string) => {
-        return await fetch(path)
-            .then(response => response.text())
-            .then(data => data)
-            .catch(err => console.error("Error loading HTML file", err))
-    }
-
     // Loads and sorts all posts
-    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataI>>) => {
+    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataPostI>>) => {
 
         const loadedModules: PostI[] = []
 
@@ -69,7 +58,8 @@ export default function Home() {
                 const html = await loadHtml(`../../posts/html/${metadata.path}`)
                 if (html) {
                     loadedModules.push({
-                        html: html,
+                        // clean html - Remove all HTML tags to avoid interfering with the search.
+                        html: html.replace(/<[^>]*>/g, ''),
                         metadata: {
                             ...metadata,
                             date: new Date(metadata.date)
@@ -87,7 +77,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        loadMetadatas(import.meta.glob<MetadataI>('../../posts/metadata/*.yaml'));
+        loadMetadatas(import.meta.glob<MetadataPostI>('../../posts/metadata/*.yaml'));
     }, [])
 
     const promiseSearch: Promise<FuseResult<PostI>[]> = useMemo(() => {
