@@ -1,73 +1,73 @@
-import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import YAML from 'yaml'
 
-// internal imports
+// Internal imports
 import Layout from '../components/Layout'
-import Comments from '../components/post/Comments';
-import HeaderPost from '../components/post/PostHeader';
-import CustomMarkdown from '../components/markdown/CustomMarkdown';
+import Comments from '../components/document/Comments';
+import HeaderPost from '../components/document/PostHeader';
+import Document from '../components/document/Document';
+import { MetadataPostI } from './Home';
+import { loadHtml } from './utils';
 
-export interface AttributesPostInteface {
-    id: number,
-    title: string,
-    tags: string[],
-    slug: string,
-    authors: string[],
-    date: Date,
-}
-
-export interface PostInterface {
-    attributes: AttributesPostInteface
-    markdown: string,
+export interface PostI {
+    metadata: MetadataPostI
+    html: string,
 }
 
 export default function Post() {
 
-    const navigate = useNavigate()
     const location = useLocation()
+    const navigate = useNavigate()
 
-    const [post, setPost] = useState<PostInterface | null>(null)
+    const [post, setPost] = useState<PostI>()
+
+    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataPostI>>) => {
+
+        let validAuthor = false
+
+        for (const path in modules) {
+
+            const module = await fetch(path)
+                .then(response => response.text())
+                .then(data => data)
+                .catch(err => console.error("Error loading YAML file", err))
+
+            if (module) {
+                const metadata = YAML.parse(module)
+
+                if (metadata && metadata.slug == location.pathname.split('/')[2]) {
+
+                    const html = await loadHtml(`../../posts/html/${metadata.path}`)
+
+                    if (html) {
+                        setPost({
+                            html: html,
+                            metadata: {
+                                ...metadata,
+                                date: new Date(metadata.date)
+                            }
+                        })
+                        validAuthor = true; break
+                    }
+                }
+
+            }
+        }
+        if (!validAuthor) navigate('/authors')
+    }
 
     useEffect(() => {
-
-        // Load post from url path
-        const loadModule = async (modules: Record<string, () => Promise<PostInterface>>) => {
-
-            let validPost = false
-
-            for (const path in modules) {
-
-                const markdown = await modules[path]()
-                    .then((module: PostInterface) => {
-                        return ({
-                            markdown: module.markdown,
-                            attributes: {
-                                ...module.attributes,
-                                date: new Date(module.attributes.date),
-                            },
-                        })
-                    })
-                    .catch(error => console.error(error))
-
-                if (markdown && markdown.attributes.slug == location.pathname.split('/')[2]) {
-                    setPost(markdown)
-                    validPost = true; break
-                }
-            }
-            if (!validPost) navigate('/')
-        }
-
-        loadModule(import.meta.glob<PostInterface>('../../posts/*.md'));
-
-    }, [location.pathname, navigate]);
+        loadMetadatas(import.meta.glob<MetadataPostI>('../../posts/metadata/*.yaml'));
+    }, [])
 
     return (
         <Layout>
-            <div className='w-full bg-secondary-color p-4'>
-                <HeaderPost authors={post?.attributes.authors} date={post?.attributes.date} />
-                <CustomMarkdown>{post?.markdown}</CustomMarkdown>
+            <div className='w-full bg-secondary-color p-4 overflow-x-hidden'>
+                <HeaderPost authors={post?.metadata.authors} date={post?.metadata.date} />
+                <Document text={post?.html} />
                 <Comments />
             </div>
-        </Layout>
+        </Layout >
     )
 }
