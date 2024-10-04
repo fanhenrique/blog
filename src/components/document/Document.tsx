@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import parse, {
@@ -32,19 +33,23 @@ import ReferenceSection from './ReferenceSection';
 import FigureSource from './FigureSource';
 
 interface DocumentProps {
-    text: string | undefined
+    text: string
 }
 
 export default function Document(props: DocumentProps) {
 
     const navigate = useNavigate()
+    const [doc, setDoc] = useState<string>('')
 
-    // Prevent Cross Site Scripting (XSS)
-    let doc = ''
-    if (props.text)
-        doc = DOMPurify.sanitize(props.text);
-    else
-        navigate('/')
+    useEffect(() => {
+
+        if (props.text) {
+            // Prevent Cross Site Scripting (XSS)
+            setDoc(DOMPurify.sanitize(props.text))
+        } else {
+            navigate('/')
+        }
+    }, [])
 
     const options: HTMLReactParserOptions = {
         replace: (domNode: DOMNode) => {
