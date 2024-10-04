@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import YAML from 'yaml'
 
 // Internal imports
 import Layout from "../components/Layout"
@@ -25,13 +24,11 @@ export default function Authors() {
 
         for (const path in modules) {
 
-            const module = await fetch(path)
-                .then(response => response.text())
-                .then(data => data)
+            const metadata = await modules[path]()
+                .then(response => response)
                 .catch(err => console.error("Error loading YAML file", err))
 
-            if (module) {
-                const metadata = YAML.parse(module)
+            if (metadata) {
                 loadedModules.push({ ...metadata })
             }
         }

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
 import Fuse, { FuseResult } from 'fuse.js'
-import YAML from 'yaml'
 
 // Internal imports
 import Layout from '../components/Layout'
@@ -9,14 +8,12 @@ import Results from '../components/cards/Results'
 import NoPostFound from '../components/cards/NoPostFound'
 import AllPosts from '../components/cards/AllPosts'
 import { PostI } from './Post'
-import { loadHtml } from './utils'
 
 export interface MetadataPostI {
     id: number,
     title: string,
     tags: string[],
     slug: string,
-    path: string,
     authors: string[],
     date: Date,
 }
@@ -48,18 +45,20 @@ export default function Home() {
 
         for (const path in modules) {
 
-            const module = await fetch(path)
-                .then(response => response.text())
-                .then(data => data)
+            const metadata = await modules[path]()
+                .then(response => response)
                 .catch(err => console.error("Error loading YAML file", err))
 
-            if (module) {
-                const metadata = YAML.parse(module)
-                const html = await loadHtml(`../../posts/html/${metadata.path}`)
-                if (html) {
+            if (metadata) {
+
+                const filepath = modules[path].name.split('/')
+                const filename = filepath[filepath.length - 1].split('.')[0]
+                const html = await import(`../../posts/html/${filename}.html?raw`)
+
+                if (html.default) {
                     loadedModules.push({
                         // clean html - Remove all HTML tags to avoid interfering with the search.
-                        html: html.replace(/<[^>]*>/g, ''),
+                        html: html.default.replace(/<[^>]*>/g, ''),
                         metadata: {
                             ...metadata,
                             date: new Date(metadata.date)
@@ -67,8 +66,8 @@ export default function Home() {
                     })
                 }
             }
-
         }
+
         loadedModules.sort((a: PostI, b: PostI) => {
             return b.metadata.date.getTime() - a.metadata.date.getTime()
         });
