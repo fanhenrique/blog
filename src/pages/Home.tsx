@@ -78,8 +78,6 @@ export default function Home() {
         setPosts(loadedModules)
     }
 
-    console.log(posts)
-
     useEffect(() => {
         loadMetadatas(import.meta.glob<MetadataPostI>('../../posts/metadata/*.yaml'));
     }, [])
