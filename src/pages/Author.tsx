@@ -34,9 +34,12 @@ export default function Author() {
 
                 const filepath = modules[path].name.split('/')
                 const filename = filepath[filepath.length - 1].split('.')[0]
-                const html = await import(`../../authors/html/${filename}.html?raw`)
 
-                if (html.default) {
+                const html = await import(`../../authors/html/${filename}.html?raw`)
+                    .then((response) => response)
+                    .catch(err => console.error("Error loading HTML file", err))
+
+                if (html && html.default) {
                     setAuthor({
                         html: html.default,
                         metadata: { ...metadata }
