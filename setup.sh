@@ -98,9 +98,9 @@ function generateHTMLWithBib() {
         --verbose \
         --wrap=none \
         --no-highlight \
-        --bibliography "$2" \
+        --metadata-file "$2" \
+        --bibliography "$3" \
         --citeproc \
-        --metadata-file "$3" \
         --output "$4"
     then
         echo "New file created: $4"
