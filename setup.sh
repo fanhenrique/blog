@@ -14,9 +14,10 @@ function show_help() {
     echo ""
     echo "Options:"
     echo "  setup      Creates all necessary directories"
-    echo "  posts      Convert Markdown file to HTML file"
-    echo "  authors    Convert Markdown file to HTML file"
-    echo "  all        posts & authors"
+    echo "  post       Parameters: Markdown BibTeX YAML HTML"
+    echo "  posts      Convert all Markdown file to HTML file"
+    echo "  authors    Convert all Markdown file to HTML file"
+    echo "  all        Options: posts & authors"
     echo "  -h, --help Show this help message"
     echo ""
 }
@@ -69,20 +70,30 @@ function posts_setup(){
 
 function generateHTML() {
 
-    pandoc --from markdown --to html5 \
+    if pandoc --from markdown --to html5 \
         "$1" \
         --verbose \
         --wrap=none \
         --no-highlight \
         --metadata-file "$2" \
         --output "$3" 
-    
-    echo "New file created: $3"
+    then 
+        echo "New file created: $3"
+    else
+        pandocError $?
+    fi
+}
+
+function pandocError(){
+    echo "pandoc error: $1"
+    echo ""
+    show_help
+    exit 1
 }
 
 function generateHTMLWithBib() {
 
-    pandoc --from markdown --to html5 \
+    if pandoc --from markdown --to html5 \
         "$1" \
         --verbose \
         --wrap=none \
@@ -91,8 +102,11 @@ function generateHTMLWithBib() {
         --citeproc \
         --metadata-file "$3" \
         --output "$4"
-
-    echo "New file created: $4"
+    then
+        echo "New file created: $4"
+    else
+        pandocError $?
+    fi
 }
 
 function posts() {
@@ -153,27 +167,47 @@ function authors() {
     done
 }
 
-case "$1" in
-    setup)
-        authors_setup
-        posts_setup
-        ;;
-    posts)
-        posts
-        ;;
-    authors)
-        authors
-        ;;
-    all)
-        posts
-        authors
-        ;;
-    -h|--help)
-        show_help
-        ;;
-    *)
-        echo "Invalid option: $1"
-        show_help
-        exit 1
-        ;;
-esac
+function post(){
+    generateHTMLWithBib "${1}" "${2}" "${3}" "${4}"
+}
+
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        setup)
+            authors_setup
+            posts_setup
+            shift
+            ;;
+        post)
+            if [[ "$#" -lt 5 ]]; then
+                echo "The 'post' option requires four parameters."
+                show_help
+                exit 1
+            fi
+            post "$2" "$3" "$4" "$5"
+            shift 5
+            ;;
+        posts)
+            posts
+            shift
+            ;;
+        authors)
+            authors
+            shift
+            ;;
+        all)
+            posts
+            authors
+            shift
+            ;;
+        -h|--help)
+            show_help
+            exit 0
+            ;;
+        *)
+            echo "Invalid option: $1"
+            show_help
+            exit 1
+            ;;
+    esac
+done
