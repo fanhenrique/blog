@@ -164,9 +164,6 @@ function authors() {
     done
 }
 
-function post(){
-    generateHTMLWithBib "${1}" "${2}" "${3}" "${4}"
-}
 
 while [[ "$#" -gt 0 ]]; do
     case "$1" in
