@@ -1,12 +1,12 @@
 #!/bin/bash
 
 POST_MD_DIR="./posts/markdown/"
-POST_YAML_DIR="./posts/metadata/"
+POST_METADATA_DIR="./posts/metadata/"
 POST_HTML_DIR="./posts/html/"
 POST_BIB_DIR="./posts/bibliography/"
 
 AUTHORS_MD_DIR="./authors/markdown/"
-AUTHORS_YAML_DIR="./authors/metadata/"
+AUTHORS_METADATA_DIR="./authors/metadata/"
 AUTHORS_HTML_DIR="./authors/html/"
 
 function show_help() {
@@ -30,10 +30,10 @@ function authors_setup(){
         cp ./template.md $AUTHORS_MD_DIR
     fi
 
-    if [ ! -d "$AUTHORS_YAML_DIR" ]; then
-        mkdir -p $AUTHORS_YAML_DIR
-        echo "Directory created $AUTHORS_YAML_DIR"
-        cp ./template.yaml $AUTHORS_YAML_DIR
+    if [ ! -d "$AUTHORS_METADATA_DIR" ]; then
+        mkdir -p $AUTHORS_METADATA_DIR
+        echo "Directory created $AUTHORS_METADATA_DIR"
+        cp ./template.yaml $AUTHORS_METADATA_DIR
     fi
 
     if [ ! -d "$AUTHORS_HTML_DIR" ]; then
@@ -50,10 +50,10 @@ function posts_setup(){
         cp ./template.md $POST_MD_DIR
     fi
 
-    if [ ! -d "$POST_YAML_DIR" ]; then
-        mkdir -p $POST_YAML_DIR
-        echo "Directory created $POST_YAML_DIR"
-        cp ./template.yaml $POST_YAML_DIR
+    if [ ! -d "$POST_METADATA_DIR" ]; then
+        mkdir -p $POST_METADATA_DIR
+        echo "Directory created $POST_METADATA_DIR"
+        cp ./template.yaml $POST_METADATA_DIR
     fi
 
     if [ ! -d "$POST_HTML_DIR" ]; then
@@ -112,32 +112,29 @@ function generateHTMLWithBib() {
 function posts() {
 
     MD_FILES=$(ls $POST_MD_DIR)
-    YAML_FILES=$(ls $POST_YAML_DIR)
+    METADATA_FILES=$(ls $POST_METADATA_DIR)
     BIB_FILES=$(ls $POST_BIB_DIR)
 
     for MD_FILE in $MD_FILES; do
-        # MD_EXTENSION="${MD_FILE#*.}"
         MD_FILENAME=${MD_FILE%.*}
 
-        for YAML_FILE in $YAML_FILES; do
-            # YAML_EXTENSION="${YAML_FILE#*.}"
-            YAML_FILENAME=${YAML_FILE%.*}
+        for METADATA_FILE in $METADATA_FILES; do
+            METADATA_FILENAME=${METADATA_FILE%.*}
 
             for BIB_FILE in $BIB_FILES; do
-                # BIB_EXTENSION="${BIB_FILE#*.}"
                 BIB_FILENAME=${BIB_FILE%.*}
 
-                if [[ "$YAML_FILENAME" == "$MD_FILENAME" ]]; then
+                if [[ "$METADATA_FILENAME" == "$MD_FILENAME" ]]; then
                     if [[ "$MD_FILENAME" == "$BIB_FILENAME" ]]; then
                         generateHTMLWithBib \
                             "${POST_MD_DIR}${MD_FILE}" \
+                            "${POST_METADATA_DIR}${METADATA_FILE}" \
                             "${POST_BIB_DIR}${BIB_FILE}" \
-                            "${POST_YAML_DIR}${YAML_FILE}" \
                             "${POST_HTML_DIR}${MD_FILENAME}.html"
                     else    
                         generateHTML \
                             "${POST_MD_DIR}${MD_FILE}" \
-                            "${POST_YAML_DIR}${YAML_FILE}" \
+                            "${POST_METADATA_DIR}${METADATA_FILE}" \
                             "${POST_HTML_DIR}${MD_FILENAME}.html"
                     fi
                 fi
@@ -149,18 +146,18 @@ function posts() {
 function authors() {
   
     MD_FILES=$(ls $AUTHORS_MD_DIR)
-    YAML_FILES=$(ls $AUTHORS_YAML_DIR)
+    METADATA_FILES=$(ls $AUTHORS_METADATA_DIR)
 
     for MD_FILE in $MD_FILES; do
         MD_FILENAME=${MD_FILE%.*}
 
-        for YAML_FILE in $YAML_FILES; do
-            YAML_FILENAME=${YAML_FILE%.*}
+        for METADATA_FILE in $METADATA_FILES; do
+            METADATA_FILENAME=${METADATA_FILE%.*}
 
-            if [[ "$YAML_FILENAME" == "$MD_FILENAME" ]]; then
+            if [[ "$METADATA_FILENAME" == "$MD_FILENAME" ]]; then
                 generateHTML \
                     "${AUTHORS_MD_DIR}${MD_FILE}" \
-                    "${AUTHORS_YAML_DIR}${YAML_FILE}" \
+                    "${AUTHORS_METADATA_DIR}${METADATA_FILE}" \
                     "${AUTHORS_HTML_DIR}${MD_FILENAME}.html"
             fi
         done
