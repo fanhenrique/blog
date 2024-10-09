@@ -78,15 +78,15 @@ function generateHTML() {
         --metadata-file "$2" \
         --output "$3" 
     then 
-        echo "New file created: $3"
+        echo "New HTML file created: $3"
     else
         pandocError $?
     fi
 }
 
 function pandocError(){
-    echo "pandoc error: $1"
     echo ""
+    echo "Pandoc error: $1"
     show_help
     exit 1
 }
@@ -103,7 +103,7 @@ function generateHTMLWithBib() {
         --citeproc \
         --output "$4"
     then
-        echo "New file created: $4"
+        echo "New HTML file created: $4"
     else
         pandocError $?
     fi
