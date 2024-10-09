@@ -164,35 +164,44 @@ function authors() {
     done
 }
 
+if [[ "$#" -eq 0 ]]; then
+    echo "No arguments provided."
+    show_help
+    exit 1
+fi
+
+POST_FILE=""
+BIB_FILE=""
+METADATA_FILE=""
+OUTPUT_FILE=""
+ALL_PATH=""
 
 while [[ "$#" -gt 0 ]]; do
     case "$1" in
-        setup)
+        -s|--setup)
             authors_setup
             posts_setup
             shift
             ;;
-        post)
-            if [[ "$#" -lt 5 ]]; then
-                echo "The 'post' option requires four parameters."
-                show_help
-                exit 1
-            fi
-            post "$2" "$3" "$4" "$5"
-            shift 5
+        -p|--post)
+            POST_FILE="$2"
+            shift 2
             ;;
-        posts)
-            posts
-            shift
+        -b|--bib)
+            BIB_FILE="$2"
+            shift 2
             ;;
-        authors)
-            authors
-            shift
+        -m|--metadata)
+            METADATA_FILE="$2"
+            shift 2
             ;;
-        all)
-            posts
-            authors
-            shift
+        -o|--output)
+            OUTPUT_FILE="$2"
+            shift 2
+            ;;
+        -a|--all)
+            ALL_PATH="$2"
+            shift 2
             ;;
         -h|--help)
             show_help
@@ -205,3 +214,39 @@ while [[ "$#" -gt 0 ]]; do
             ;;
     esac
 done
+
+if [[ -n "$ALL_PATH" ]]; then
+    case "$ALL_PATH" in
+        posts/)
+            posts
+        ;;
+        authors/)
+            authors
+        ;;
+        *)
+            echo ""
+            echo "Error:"
+            echo "  Invalid option: $ALL_PATH"
+            echo ""
+            echo "  If you don't already have the directory structure,"
+            echo "    create it with the --setup argument."
+            show_help
+            exit 1
+        ;;
+    esac
+else
+
+    if [[ -n "$POST_FILE" && -n "$METADATA_FILE" && -n "$OUTPUT_FILE" ]]; then
+
+        if [[ -n "$BIB_FILE" ]]; then
+            generateHTMLWithBib "$POST_FILE" "$METADATA_FILE" "$BIB_FILE" "$OUTPUT_FILE"
+        else
+            generateHTML "$POST_FILE" "$METADATA_FILE" "$OUTPUT_FILE"
+        fi
+    else
+        echo "Error:"
+        echo "   The parameters --post, --metadata, --output are required."
+        show_help
+        exit 1
+    fi
+fi
