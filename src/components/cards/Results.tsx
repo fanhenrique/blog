@@ -3,7 +3,7 @@ import { FuseResult } from "fuse.js"
 // Internal imports
 import CleanSearch from "../CleanSearch"
 import PostCard from "./PostCard"
-import { PostI } from "../../pages/Home"
+import { PostI } from "../../pages/Post"
 
 interface ResultsProps {
     results: FuseResult<PostI>[]

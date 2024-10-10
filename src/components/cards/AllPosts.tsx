@@ -1,5 +1,5 @@
 // Internal imports
-import { PostI } from "../../pages/Home"
+import { PostI } from "../../pages/Post"
 import PostCard from "./PostCard"
 import Span from "../Span"
 
