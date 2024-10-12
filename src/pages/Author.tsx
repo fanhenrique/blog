@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Internal imports
@@ -20,7 +20,7 @@ export default function Author() {
 
     const [author, setAuthor] = useState<AuthorsI>()
 
-    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataAuthorI>>) => {
+    const loadMetadatas = useCallback(async (modules: Record<string, () => Promise<MetadataAuthorI>>) => {
 
         let validAuthor = false
 
@@ -49,11 +49,11 @@ export default function Author() {
             }
         }
         if (!validAuthor) navigate('/authors')
-    }
+    }, [location.pathname, navigate])
 
     useEffect(() => {
         loadMetadatas(import.meta.glob<MetadataAuthorI>('../../authors/metadata/*.yaml'));
-    }, [])
+    }, [loadMetadatas])
 
     return (
         <Layout>

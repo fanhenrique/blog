@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // Internal imports
 import Layout from '../components/Layout'
@@ -20,7 +20,7 @@ export default function Post() {
 
     const [post, setPost] = useState<PostI>()
 
-    const loadMetadatas = async (modules: Record<string, () => Promise<MetadataPostI>>) => {
+    const loadMetadatas = useCallback(async (modules: Record<string, () => Promise<MetadataPostI>>) => {
 
         let validAuthor = false
 
@@ -52,11 +52,11 @@ export default function Post() {
             }
         }
         if (!validAuthor) navigate('/')
-    }
+    }, [location.pathname, navigate])
 
     useEffect(() => {
         loadMetadatas(import.meta.glob<MetadataPostI>('../../posts/metadata/*.yaml'));
-    }, [])
+    }, [loadMetadatas])
 
     return (
         <Layout>
