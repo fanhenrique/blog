@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 
-export default function (props: HTMLAttributes<HTMLDivElement>) {
+export default function ReferenceSection(props: HTMLAttributes<HTMLDivElement>) {
     return (
         <div
             {...props}
