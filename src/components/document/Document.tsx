@@ -49,7 +49,7 @@ export default function Document(props: DocumentProps) {
         } else {
             navigate('/')
         }
-    }, [])
+    }, [navigate, props.text])
 
     const options: HTMLReactParserOptions = {
         replace: (domNode: DOMNode) => {
