@@ -112,7 +112,7 @@ export default function Document(props: DocumentProps) {
             }
 
             // Code block
-            if (typedDomNode.name === 'pre' && typedDomNode.attribs.class !== 'command') {
+            if (typedDomNode.name === 'pre' && typedDomNode.attribs.class && typedDomNode.attribs.class !== 'command') {
                 const c = typedDomNode.firstChild as Element
                 if (c instanceof Element && c.name == 'code') {
                     if (c.firstChild instanceof Text) {
@@ -120,7 +120,7 @@ export default function Document(props: DocumentProps) {
                             <LanguageSyntax
                                 language={typedDomNode.attribs.class}
                             >
-                                {domToReact(c.children as DOMNode[], options)}
+                                {c.firstChild.data}
                             </LanguageSyntax>
                         )
                     }
@@ -175,7 +175,7 @@ export default function Document(props: DocumentProps) {
     }
 
     return (
-        < div className='text-lg text-white font-normal' >
+        <div className='text-lg text-white font-normal' >
             {parse(doc, options)}
         </div >
     )
