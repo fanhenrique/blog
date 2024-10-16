@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-To build this blog, you need to use [Pandoc](https://pandoc.org/), a file converter from one markup format to another. See how to install Pandoc on your operating system at [Installing Pandoc](https://pandoc.org/installing.html)
+To build this blog, you need to use [Pandoc](https://pandoc.org/), a file converter from one markup format to another. See how to install Pandoc on your operating system at [Installing Pandoc](https://pandoc.org/installing.html). Before you start writing your first post, I recommend reading the [Pandoc User’s Guide](https://pandoc.org/MANUAL.html).
 
 ## Posts
 
