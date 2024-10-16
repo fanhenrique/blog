@@ -75,6 +75,13 @@ export default function Document(props: DocumentProps) {
             if (typedDomNode.name === 'h6')
                 return <Heading6>{domToReact(typedDomNode.children as DOMNode[], options)}</Heading6>
 
+            // Footnote gap ↩︎
+            if (typedDomNode.name === 'p') {
+                if (typedDomNode.parent instanceof Element && typedDomNode.parent.name == 'li' && typedDomNode.parent.attribs.role === 'doc-endnote') {
+                    return <Paragraph className='flex gap-x-1.5'>{domToReact(typedDomNode.children as DOMNode[], options)}</Paragraph>
+                }
+            }
+
             if (typedDomNode.name === 'p')
                 return <Paragraph>{domToReact(typedDomNode.children as DOMNode[], options)}</Paragraph>
 
@@ -94,6 +101,13 @@ export default function Document(props: DocumentProps) {
 
             if (typedDomNode.name === 'ul')
                 return <Ul>{domToReact(typedDomNode.children as DOMNode[], options)}</Ul>
+
+            // Footnote padding left
+            if (typedDomNode.name === 'ol') {
+                if (typedDomNode.parent instanceof Element && typedDomNode.parent.name == 'section' && typedDomNode.parent.attribs.class === 'footnotes footnotes-end-of-document') {
+                    return <Ol className='pl-6'>{domToReact(typedDomNode.children as DOMNode[], options)}</Ol>
+                }
+            }
 
             if (typedDomNode.name === 'ol')
                 return <Ol>{domToReact(typedDomNode.children as DOMNode[], options)}</Ol>
