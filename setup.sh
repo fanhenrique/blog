@@ -88,6 +88,7 @@ function generateHTML() {
         --filter pandoc-crossref \
         --figure-caption-position above \
         --table-caption-position above \
+        --strip-comments \
         --output "$3"
     then 
         echo "New HTML file created: $3"
@@ -116,6 +117,7 @@ function generateHTMLWithBib() {
         --filter pandoc-crossref \
         --figure-caption-position above \
         --table-caption-position above \
+        --strip-comments \
         --output "$4"
     then
         echo "New HTML file created: $4"
