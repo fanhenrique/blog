@@ -86,6 +86,8 @@ function generateHTML() {
         --no-highlight \
         --metadata-file "$2" \
         --filter pandoc-crossref \
+        --figure-caption-position="above" \
+        --table-caption-position="above" \
         --output "$3"
     then 
         echo "New HTML file created: $3"
@@ -112,6 +114,8 @@ function generateHTMLWithBib() {
         --bibliography "$3" \
         --citeproc \
         --filter pandoc-crossref \
+        --figure-caption-position="above" \
+        --table-caption-position="above" \
         --output "$4"
     then
         echo "New HTML file created: $4"
