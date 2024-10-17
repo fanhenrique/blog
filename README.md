@@ -2,7 +2,18 @@
 
 ## Dependencies
 
+### Pandoc
+
 To build this blog, you need to use [Pandoc](https://pandoc.org/), a file converter from one markup format to another. See how to install Pandoc on your operating system at [Installing Pandoc](https://pandoc.org/installing.html). Before you start writing your first post, I recommend reading the [Pandoc User’s Guide](https://pandoc.org/MANUAL.html).
+
+[Pandoc repository](https://github.com/jgm/pandoc)
+
+### pandoc-crossref 
+
+[pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) is a pandoc filter for numbering figures, equations, tables and cross-references to them.
+
+[pandoc-crossref repository](https://github.com/lierdakil/pandoc-crossref)
+
 
 ## Posts
 

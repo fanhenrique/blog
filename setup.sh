@@ -85,7 +85,8 @@ function generateHTML() {
         --wrap=none \
         --no-highlight \
         --metadata-file "$2" \
-        --output "$3" 
+        --filter pandoc-crossref \
+        --output "$3"
     then 
         echo "New HTML file created: $3"
     else
@@ -110,6 +111,7 @@ function generateHTMLWithBib() {
         --metadata-file "$2" \
         --bibliography "$3" \
         --citeproc \
+        --filter pandoc-crossref \
         --output "$4"
     then
         echo "New HTML file created: $4"
