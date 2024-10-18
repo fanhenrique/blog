@@ -28,6 +28,7 @@ function show_help() {
     echo "                                          [posts/markdown/], [posts/matadata/], [posts/bibliography/], [posts/html/]"
     echo "                                          [authors/markdown/], [authors/matadata/], [authors/html/]"
     echo "  -h, --help                          Show this help message."
+    echo "  -v, --verbose                       Pandoc verbose mode"
     echo ""
 }
 
@@ -81,7 +82,6 @@ function generateHTML() {
 
     if pandoc --from markdown --to html5 \
         "$1" \
-        --verbose \
         --wrap=none \
         --no-highlight \
         --metadata-file "$2" \
@@ -89,7 +89,8 @@ function generateHTML() {
         --figure-caption-position above \
         --table-caption-position above \
         --strip-comments \
-        --output "$3"
+        --output "$3" \
+        $VERBOSE
     then 
         echo "New HTML file created: $3"
     else
@@ -108,7 +109,6 @@ function generateHTMLWithBib() {
 
     if pandoc --from markdown --to html5 \
         "$1" \
-        --verbose \
         --wrap=none \
         --no-highlight \
         --metadata-file "$2" \
@@ -118,7 +118,8 @@ function generateHTMLWithBib() {
         --figure-caption-position above \
         --table-caption-position above \
         --strip-comments \
-        --output "$4"
+        --output "$4" \
+        $VERBOSE
     then
         echo "New HTML file created: $4"
     else
@@ -161,7 +162,7 @@ function posts() {
 }
 
 function authors() {
-  
+
     MD_FILES=$(ls $AUTHORS_MD_DIR)
     METADATA_FILES=$(ls $AUTHORS_METADATA_DIR)
 
@@ -198,6 +199,10 @@ while [[ "$#" -gt 0 ]]; do
         -s|--setup)
             authors_setup
             posts_setup
+            shift
+            ;;
+        -v|--verbose)
+            VERBOSE="--verbose"
             shift
             ;;
         -p|--post)
