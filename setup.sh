@@ -82,10 +82,13 @@ function generateHTML() {
 
     if pandoc --from markdown --to html5 \
         "$1" \
+        --template ./pandoc-template.html \
+        --section-divs \
+        --number-sections \
         --wrap=none \
         --no-highlight \
-        --metadata-file "$2" \
         --filter pandoc-crossref \
+        --metadata-file "$2" \
         --figure-caption-position above \
         --table-caption-position above \
         --strip-comments \
@@ -109,12 +112,15 @@ function generateHTMLWithBib() {
 
     if pandoc --from markdown --to html5 \
         "$1" \
+        --template ./pandoc-template.html \
+        --section-divs \
+        --number-sections \
         --wrap=none \
         --no-highlight \
+        --filter pandoc-crossref \
         --metadata-file "$2" \
         --bibliography "$3" \
         --citeproc \
-        --filter pandoc-crossref \
         --figure-caption-position above \
         --table-caption-position above \
         --strip-comments \
