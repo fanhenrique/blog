@@ -124,6 +124,7 @@ function generateHTMLWithBib() {
         --figure-caption-position above \
         --table-caption-position above \
         --strip-comments \
+        --shift-heading-level-by=1 \
         --output "$4" \
         $VERBOSE
     then
