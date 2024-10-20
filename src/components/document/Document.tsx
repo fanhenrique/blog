@@ -40,6 +40,7 @@ export default function Document(props: DocumentProps) {
 
     const navigate = useNavigate()
     const [doc, setDoc] = useState<string>('')
+    let countRef = 0
 
     useEffect(() => {
 
@@ -74,6 +75,13 @@ export default function Document(props: DocumentProps) {
             if (typedDomNode.name === 'h6')
                 return <Heading6>{domToReact(typedDomNode.children as DOMNode[], options)}</Heading6>
 
+            // Footnote gap ↩︎
+            if (typedDomNode.name === 'p') {
+                if (typedDomNode.parent instanceof Element && typedDomNode.parent.name == 'li' && typedDomNode.parent.attribs.role === 'doc-endnote') {
+                    return <Paragraph className='flex gap-x-1.5'>{domToReact(typedDomNode.children as DOMNode[], options)}</Paragraph>
+                }
+            }
+
             if (typedDomNode.name === 'p')
                 return <Paragraph>{domToReact(typedDomNode.children as DOMNode[], options)}</Paragraph>
 
@@ -93,6 +101,13 @@ export default function Document(props: DocumentProps) {
 
             if (typedDomNode.name === 'ul')
                 return <Ul>{domToReact(typedDomNode.children as DOMNode[], options)}</Ul>
+
+            // Footnote padding left
+            if (typedDomNode.name === 'ol') {
+                if (typedDomNode.parent instanceof Element && typedDomNode.parent.name == 'section' && typedDomNode.parent.attribs.class === 'footnotes footnotes-end-of-document') {
+                    return <Ol className='pl-6'>{domToReact(typedDomNode.children as DOMNode[], options)}</Ol>
+                }
+            }
 
             if (typedDomNode.name === 'ol')
                 return <Ol>{domToReact(typedDomNode.children as DOMNode[], options)}</Ol>
@@ -128,8 +143,10 @@ export default function Document(props: DocumentProps) {
             }
 
             // Figure
-            if (typedDomNode.name === 'figure')
-                return <Figure>{domToReact(typedDomNode.children as DOMNode[], options)}</Figure>
+            if (typedDomNode.name === 'figure') {
+                const props = attributesToProps(typedDomNode.attribs)
+                return <Figure {...props}>{domToReact(typedDomNode.children as DOMNode[], options)}</Figure>
+            }
 
             // Figure title
             if (typedDomNode.name === 'figcaption')
@@ -153,25 +170,20 @@ export default function Document(props: DocumentProps) {
                 )
             }
 
-            return false
-        },
-        transform(reactNode, domNode: DOMNode) {
-
-            const typedDomNode = domNode as Element
-
             // Link to reference
             if (typedDomNode.name === 'span' && typedDomNode.attribs.class === 'citation') {
                 return (
                     <Anchor
+                        id={`${typedDomNode.attribs['data-cites']}-${countRef++}`}
                         href={`#ref-${typedDomNode.attribs['data-cites']}`}
                     >
-                        {reactNode}
+                        {domToReact(typedDomNode.children as DOMNode[], options)}
                     </Anchor>
                 )
             }
-            return <>{reactNode}</>
-        }
 
+            return false
+        },
     }
 
     return (
