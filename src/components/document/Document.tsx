@@ -143,8 +143,10 @@ export default function Document(props: DocumentProps) {
             }
 
             // Figure
-            if (typedDomNode.name === 'figure')
-                return <Figure>{domToReact(typedDomNode.children as DOMNode[], options)}</Figure>
+            if (typedDomNode.name === 'figure') {
+                const props = attributesToProps(typedDomNode.attribs)
+                return <Figure {...props}>{domToReact(typedDomNode.children as DOMNode[], options)}</Figure>
+            }
 
             // Figure title
             if (typedDomNode.name === 'figcaption')
