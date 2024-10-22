@@ -14,7 +14,7 @@ function show_help() {
     echo "Usage: $0 [option] [file or dir]"
     echo ""
     echo "Options:"
-    echo "  -p, --post [Markdown file]          Required"
+    echo "  -i, --input [Markdown file]         Required"
     echo "  -m, --metadata [YAML file]          Required"
     echo "  -o, --output [HTML file]            Required"
     echo "  -b, --bib [BibTeX file]             Optional"
@@ -224,7 +224,7 @@ if [[ "$#" -eq 0 ]]; then
     exit 1
 fi
 
-POST_FILE=""
+INPUT_FILE=""
 BIB_FILE=""
 METADATA_FILE=""
 OUTPUT_FILE=""
@@ -241,8 +241,8 @@ while [[ "$#" -gt 0 ]]; do
             VERBOSE="--verbose"
             shift
             ;;
-        -p|--post)
-            POST_FILE="$2"
+        -i|--input)
+            INPUT_FILE="$2"
             shift 2
             ;;
         -b|--bib)
@@ -294,16 +294,16 @@ if [[ -n "$ALL_PATH" ]]; then
     esac
 else
 
-    if [[ -n "$POST_FILE" && -n "$METADATA_FILE" && -n "$OUTPUT_FILE" ]]; then
+    if [[ -n "$INPUT_FILE" && -n "$METADATA_FILE" && -n "$OUTPUT_FILE" ]]; then
 
         if [[ -n "$BIB_FILE" ]]; then
-            generateHTMLWithBib "$POST_FILE" "$METADATA_FILE" "$OUTPUT_FILE" "$BIB_FILE"
+            generateHTMLWithBib "$INPUT_FILE" "$METADATA_FILE" "$OUTPUT_FILE" "$BIB_FILE"
         else
-            generateHTML "$POST_FILE" "$METADATA_FILE" "$OUTPUT_FILE"
+            generateHTML "$INPUT_FILE" "$METADATA_FILE" "$OUTPUT_FILE"
         fi
     else
         echo "Error:"
-        echo "   The parameters --post, --metadata, --output are required."
+        echo "   The parameters --input, --metadata, --output are required."
         show_help
         exit 1
     fi
