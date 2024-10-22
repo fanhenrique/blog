@@ -80,22 +80,27 @@ function posts_setup(){
 
 function generateHTML() {
 
+
+    INPUT_FILE="$1"
+    METADATA_FILE="$2"
+    OUTPUT_FILE="$3"
+
     if pandoc --from markdown --to html5 \
-        "$1" \
+        "$INPUT_FILE" \
         --template ./pandoc-template.html \
         --section-divs \
-        --number-sections \
         --wrap=none \
         --no-highlight \
-        --filter pandoc-crossref \
-        --metadata-file "$2" \
-        --figure-caption-position above \
-        --table-caption-position above \
+        --metadata-file "$METADATA_FILE" \
         --strip-comments \
-        --output "$3" \
+        --output "$OUTPUT_FILE" \
         $VERBOSE
     then 
-        echo "New HTML file created: $3"
+        if [[ -f "$OUTPUT_FILE" ]]; then
+            echo "New HTML file created: $OUTPUT_FILE"
+        else
+            echo "Could not create HTML file: $OUTPUT_FILE"
+        fi
     else
         pandocError $?
     fi
@@ -110,26 +115,49 @@ function pandocError(){
 
 function generateHTMLWithBib() {
 
+    INPUT_FILE="$1"
+    METADATA_FILE="$2"
+    OUTPUT_FILE="$3"
+    BIBLIOGRAPHY_FILE="$4"
+
+    # metadata
+    # linkReferences: To make references into hyperlinks to referenced element.
+    # nameInLink: For single-element references, inlcude prefix into hyperlink (when using linkReferences).
+    # link-citations: If true, citations will be hyperlinked to the corresponding
+        # bibliography entries (for author-date and numerical styles only).
+    # link-bibliography - If true, DOIs, PMCIDs, PMID, and URLs in bibliographies will
+        # be rendered as hyperlinks. (If an entry contains a DOI, PMCID, PMID, or URL,
+        # but none of these fields are rendered by the style, then the title, or in
+        # the absence of a title the whole entry, will be hyperlinked.).
+
     if pandoc --from markdown --to html5 \
-        "$1" \
+        "$INPUT_FILE" \
         --template ./pandoc-template.html \
         --section-divs \
         --number-sections \
         --wrap=none \
         --no-highlight \
         --filter pandoc-crossref \
+        --metadata=linkReferences:true \
+        --metadata=nameInLink:true \
+        --metadata=link-citations:true \
+        --metadata=link-bibliography:true \
         --metadata=crossrefYaml=./crossref.yaml \
-        --metadata-file "$2" \
-        --bibliography "$3" \
+        --metadata-file "$METADATA_FILE" \
+        --bibliography "$BIBLIOGRAPHY_FILE" \
         --citeproc \
         --figure-caption-position above \
         --table-caption-position above \
         --strip-comments \
         --shift-heading-level-by=1 \
-        --output "$4" \
+        --output "$OUTPUT_FILE" \
         $VERBOSE
     then
-        echo "New HTML file created: $4"
+        if [[ -f "$OUTPUT_FILE" ]]; then
+            echo "New HTML file created: $OUTPUT_FILE"
+        else
+            echo "Could not create HTML file: $OUTPUT_FILE"
+        fi
     else
         pandocError $?
     fi
@@ -155,8 +183,8 @@ function posts() {
                         generateHTMLWithBib \
                             "${POST_MD_DIR}${MD_FILE}" \
                             "${POST_METADATA_DIR}${METADATA_FILE}" \
-                            "${POST_BIB_DIR}${BIB_FILE}" \
-                            "${POST_HTML_DIR}${MD_FILENAME}.html"
+                            "${POST_HTML_DIR}${MD_FILENAME}.html" \
+                            "${POST_BIB_DIR}${BIB_FILE}"
                     else    
                         generateHTML \
                             "${POST_MD_DIR}${MD_FILE}" \
@@ -269,7 +297,7 @@ else
     if [[ -n "$POST_FILE" && -n "$METADATA_FILE" && -n "$OUTPUT_FILE" ]]; then
 
         if [[ -n "$BIB_FILE" ]]; then
-            generateHTMLWithBib "$POST_FILE" "$METADATA_FILE" "$BIB_FILE" "$OUTPUT_FILE"
+            generateHTMLWithBib "$POST_FILE" "$METADATA_FILE" "$OUTPUT_FILE" "$BIB_FILE"
         else
             generateHTML "$POST_FILE" "$METADATA_FILE" "$OUTPUT_FILE"
         fi
