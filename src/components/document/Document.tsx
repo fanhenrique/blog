@@ -40,7 +40,6 @@ export default function Document(props: DocumentProps) {
 
     const navigate = useNavigate()
     const [doc, setDoc] = useState<string>('')
-    let countRef = 0
 
     useEffect(() => {
 
@@ -167,18 +166,6 @@ export default function Document(props: DocumentProps) {
                     <ReferenceSection {...props}>
                         {domToReact(typedDomNode.children as DOMNode[], options)}
                     </ReferenceSection>
-                )
-            }
-
-            // Link to reference
-            if (typedDomNode.name === 'span' && typedDomNode.attribs.class === 'citation') {
-                return (
-                    <Anchor
-                        id={`${typedDomNode.attribs['data-cites']}-${countRef++}`}
-                        href={`#ref-${typedDomNode.attribs['data-cites']}`}
-                    >
-                        {domToReact(typedDomNode.children as DOMNode[], options)}
-                    </Anchor>
                 )
             }
 
