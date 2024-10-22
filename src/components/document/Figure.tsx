@@ -7,6 +7,7 @@ export default function Figure(props: HTMLAttributes<HTMLElement>) {
                 w-full flex
                 flex-col items-center
                 gap-y-5
+                my-10
             "
             {...props}
         >
