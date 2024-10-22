@@ -1,0 +1,18 @@
+figureTitle: Figura
+tableTitle: Tabela
+listingTitle: Código
+figPrefix:
+  - Figura
+  - Figuras
+tblPrefix:
+  - Tabela
+  - Tabelas
+secPrefix:
+  - Seção
+  - Seções
+lstPrefix:
+  - Código
+  - Códigos
+eqnPrefix:
+  - Equação
+  - Equações

@@ -118,6 +118,7 @@ function generateHTMLWithBib() {
         --wrap=none \
         --no-highlight \
         --filter pandoc-crossref \
+        --metadata=crossrefYaml=./crossref.yaml \
         --metadata-file "$2" \
         --bibliography "$3" \
         --citeproc \
