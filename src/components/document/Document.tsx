@@ -30,7 +30,7 @@ import Figure from './Figure';
 import FigureCaption from './FigureCaption';
 import LanguageSyntax from './LanguageSyntax';
 import ReferenceSection from './ReferenceSection';
-import FigureSource from './FigureSource';
+import SourceFigure from './SourceFigure';
 
 interface DocumentProps {
     text: string
@@ -74,6 +74,15 @@ export default function Document(props: DocumentProps) {
             if (typedDomNode.name === 'h6')
                 return <Heading6>{domToReact(typedDomNode.children as DOMNode[], options)}</Heading6>
 
+            // Source of the figure
+            if (typedDomNode.name === 'p') {
+                if (typedDomNode.children.length === 1) {
+                    const c = typedDomNode.firstChild as Element
+                    if (c instanceof Element && c.name === 'span' && (c.attribs.class === 'citation')) {
+                        return <SourceFigure>{domToReact(typedDomNode.children as DOMNode[], options)}</SourceFigure>
+                    }
+                }
+            }
 
             // Figure
             if (typedDomNode.name === 'figure') {
@@ -149,15 +158,6 @@ export default function Document(props: DocumentProps) {
                             </LanguageSyntax>
                         )
                     }
-                }
-            }
-
-
-            // Figure source
-            if (typedDomNode.name === 'span') {
-                const parent = typedDomNode.parent as Element
-                if (parent instanceof Element && parent.name == 'figure') {
-                    return <FigureSource>{domToReact(typedDomNode.children as DOMNode[], options)}</FigureSource>
                 }
             }
 
