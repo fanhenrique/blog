@@ -6,8 +6,8 @@ export default function Figure(props: HTMLAttributes<HTMLElement>) {
             className="
                 w-full flex
                 flex-col items-center
-                gap-y-5
-                my-10
+                mt-10 mb-2
+                gap-y-2
             "
             {...props}
         >

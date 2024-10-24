@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 
-export default function FigureTitle(props: HTMLAttributes<HTMLElement>) {
+export default function FigureCaption(props: HTMLAttributes<HTMLElement>) {
     return (
         <figcaption
             className="

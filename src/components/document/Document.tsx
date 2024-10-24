@@ -27,7 +27,7 @@ import Mark from './Mark';
 import Command from './Command';
 import Code from './Code';
 import Figure from './Figure';
-import FigureTitle from './FigureTitle';
+import FigureCaption from './FigureCaption';
 import LanguageSyntax from './LanguageSyntax';
 import ReferenceSection from './ReferenceSection';
 import FigureSource from './FigureSource';
@@ -73,6 +73,17 @@ export default function Document(props: DocumentProps) {
 
             if (typedDomNode.name === 'h6')
                 return <Heading6>{domToReact(typedDomNode.children as DOMNode[], options)}</Heading6>
+
+
+            // Figure
+            if (typedDomNode.name === 'figure') {
+                const props = attributesToProps(typedDomNode.attribs)
+                return <Figure {...props}>{domToReact(typedDomNode.children as DOMNode[], options)}</Figure>
+            }
+
+            // Figure caption
+            if (typedDomNode.name === 'figcaption')
+                return <FigureCaption>{domToReact(typedDomNode.children as DOMNode[], options)}</FigureCaption>
 
             // Footnote gap ↩︎
             if (typedDomNode.name === 'p') {
@@ -141,15 +152,6 @@ export default function Document(props: DocumentProps) {
                 }
             }
 
-            // Figure
-            if (typedDomNode.name === 'figure') {
-                const props = attributesToProps(typedDomNode.attribs)
-                return <Figure {...props}>{domToReact(typedDomNode.children as DOMNode[], options)}</Figure>
-            }
-
-            // Figure title
-            if (typedDomNode.name === 'figcaption')
-                return <FigureTitle>{domToReact(typedDomNode.children as DOMNode[], options)}</FigureTitle>
 
             // Figure source
             if (typedDomNode.name === 'span') {
