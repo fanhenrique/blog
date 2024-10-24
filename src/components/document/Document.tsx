@@ -96,8 +96,11 @@ export default function Document(props: DocumentProps) {
 
             // Footnote gap ↩︎
             if (typedDomNode.name === 'p') {
-                if (typedDomNode.parent instanceof Element && typedDomNode.parent.name == 'li' && typedDomNode.parent.attribs.role === 'doc-endnote') {
-                    return <Paragraph className='flex gap-x-1.5'>{domToReact(typedDomNode.children as DOMNode[], options)}</Paragraph>
+                const parent = typedDomNode.parent
+                if (parent instanceof Element && parent.name == 'li') {
+                    const section = typedDomNode.parent?.parent?.parent
+                    if (section instanceof Element && section.attribs.id === 'footnotes')
+                        return <Paragraph className='flex gap-x-1.5'>{domToReact(typedDomNode.children as DOMNode[], options)}</Paragraph>
                 }
             }
 
