@@ -3,8 +3,7 @@ import { HTMLAttributes } from "react";
 export default function Paragraph(props: HTMLAttributes<HTMLParagraphElement>) {
 
     return (
-        <p
-            className="                
+        <p className="
                 text-justify
                 tracking-wide
                 leading-relaxed
