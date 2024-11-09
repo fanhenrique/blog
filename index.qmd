@@ -6,4 +6,6 @@ listing:
   categories: numbered
   sort-ui: true
   filter-ui: true
+  fields: [title, subtitle, description, date, categories]
+  image-align: left
 ---
