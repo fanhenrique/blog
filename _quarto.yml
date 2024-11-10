@@ -18,6 +18,8 @@ format:
     theme: theme.scss
     template-partials: template-partials/title-block.html
     page-layout: article
+    link-external-icon: true
+    link-external-filter: ^(?:http:|https:)\/\/fanhenrique\.github\.io\/blog\/
 
 lang: pt-BR
 date-format: medium
