@@ -366,6 +366,40 @@ li.nav-item {
 blockquote.blockquote {
     border-color: $default-color;
     background-color: #1f2937;
+}
+
+// Post listing categories
+div.quarto-post div.body div.listing-categories div.listing-category {
+
+    font-size: 0.75rem;
+    color: $body-color;
+    border: none none;
+
+    &:hover {
+        background-color: $default-color;
+    }
+}
+
+// Sidebar categories
+div#quarto-margin-sidebar div.quarto-listing-category {
+
+    display: grid;
+    row-gap: 0.5rem;
+
+    div.category {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+
+        &:hover {
+            color: $default-color;
+        }
+
+        &.active {
+            font-weight: 700;
+            color: $default-color;
+        }
+    }
+}
 
 // Sidebar - On this page
 .sidebar .nav-link {
