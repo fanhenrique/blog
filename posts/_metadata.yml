@@ -57,3 +57,17 @@ code-overflow: scroll
 
 # Post last modified date
 date-modified: last-modified
+
+
+comments:
+  giscus:
+    repo: fanhenrique/blog
+    repo-id: R_kgDONMKAJw
+    category: General
+    category-id: DIC_kwDONMKAJ84CkJwQ
+    mapping: pathname
+    reactions-enabled: true
+    input-position: top
+    theme: dark_protanopia
+    language: pt-BR
+    loading: lazy
