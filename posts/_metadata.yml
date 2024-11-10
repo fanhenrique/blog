@@ -6,3 +6,54 @@ freeze: true
 
 # Enable banner style title blocks
 title-block-banner: true
+title-block-categories: false
+
+
+# line-height
+linestretch: 1.625
+
+
+# On this page
+toc: true
+toc-location: right
+toc-depth: 6
+
+
+# All captions
+cap-location: top
+
+
+# Section
+section-divs: true
+number-sections: true
+shift-heading-level-by: 1
+anchor-sections: false
+
+
+# Figure
+fig-align: center
+
+
+# Crossref
+crossrefs-hover: false
+
+
+# References bibliography
+citeproc: true
+citations-hover: false
+citation-location: document
+
+
+# Footnote
+footnotes-hover: false
+reference-location: section
+
+
+# Code
+code-line-numbers: false
+code-copy: hover
+code-overflow: scroll
+
+
+# Post last modified date
+date-modified: last-modified
