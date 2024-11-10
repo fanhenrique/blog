@@ -1,0 +1,15 @@
+---
+title: Henrique Fan da Silva
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/fanhenrique/
+    - icon: github
+      text: Github
+      href: https://github.com/fanhenrique
+css: style.css
+---
+
+About page
