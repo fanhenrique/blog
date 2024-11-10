@@ -366,4 +366,34 @@ li.nav-item {
 blockquote.blockquote {
     border-color: $default-color;
     background-color: #1f2937;
+
+// Sidebar - On this page
+.sidebar .nav-link {
+
+    font-size: 0.875rem;
+
+    &:hover span.header-section-number {
+        color: $default-color;
+    }
+
+    &.active {
+        font-weight: bold;
+    }
+}
+
+// Metadata in post listing
+div.quarto-post .metadata {
+    align-items: flex-end;
+
+    a.no-external {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .listing-date,
+        .listing-reading-time {
+            width: fit-content;
+            text-align: end;
+        }
+    }
 }
