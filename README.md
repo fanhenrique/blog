@@ -2,7 +2,7 @@
 
 This blog was created using [Quarto](https://quarto.org/), an open source scientific and technical publishing system. Quarto uses [Pandoc](https://pandoc.org/), a file converter from one markup format to another.
 
-Repositories: 
+Repositories:
 
 - [Quarto Repositories](https://github.com/quarto-dev)
 
@@ -16,7 +16,7 @@ Before you start writing your first post, I recommend reading:
 
 - [Pandoc User Guide](https://pandoc.org/MANUAL.html).
 
-- [Quarto Guide](https://quarto.org/docs/guide/) 
+- [Quarto Guide](https://quarto.org/docs/guide/)
 
 - [Creating a Blog with Quarto](https://quarto.org/docs/websites/website-blog.html).
 
