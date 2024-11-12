@@ -381,22 +381,26 @@ div.quarto-post div.body div.listing-categories div.listing-category {
 }
 
 // Sidebar categories
-div#quarto-margin-sidebar div.quarto-listing-category {
+div#quarto-margin-sidebar {
+    margin-top: 1rem;
 
-    display: grid;
-    row-gap: 0.5rem;
+    div.quarto-listing-category {
 
-    div.category {
-        font-size: 0.875rem;
-        text-transform: uppercase;
+        display: grid;
+        row-gap: 0.5rem;
 
-        &:hover {
-            color: $default-color;
-        }
+        div.category {
+            font-size: 0.875rem;
+            text-transform: uppercase;
 
-        &.active {
-            font-weight: 700;
-            color: $default-color;
+            &:hover {
+                color: $default-color;
+            }
+
+            &.active {
+                font-weight: 700;
+                color: $default-color;
+            }
         }
     }
 }
