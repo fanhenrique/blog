@@ -8,9 +8,7 @@ Repositories:
 
 - [Pandoc Repository](https://github.com/jgm/pandoc)
 
-
 Each post is written in Markdown format and converted to HTML. Additional information (metadata) about each post is provided in YAML format.
-
 
 Before you start writing your first post, I recommend reading:
 
@@ -20,5 +18,4 @@ Before you start writing your first post, I recommend reading:
 
 - [Creating a Blog with Quarto](https://quarto.org/docs/websites/website-blog.html).
 
-
-If you like the customization of my Quarto blog, feel free to clone this repository and change it.
+If you like the customization of my Quarto blog, feel free to fork this repository and change it.
