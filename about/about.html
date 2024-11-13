@@ -37,7 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6561bbde787c299e21493071c8edc6ff.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7a0aceb0e0ca6d3a893fee68c8a387f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-c0aa3be675714d572b9038a2aca46743.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,6 +114,8 @@ ul.task-list li input[type="checkbox"] {
     
 <!-- main -->
 <div class="quarto-about-jolla page-columns page-full">
+  <img src="image.jpg" class="about-image
+  round " style="height: 15em; width: 15em;">
  <header id="title-block-header" class="quarto-title-block default page-columns page-full">
 	<div class="quarto-title-banner page-columns page-full">
 		<div class="quarto-title column-body">
@@ -123,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 	</div>
 </header><main class="content" id="quarto-document-content">
-<p>About page</p>
+<p>Olá, me chamo Henrique e sou formado em Ciência da Computação pela Universidade Federal do Pampa (UNIPAMPA). Criei este blog para compartilhar os assuntos que estudo na área da computação. A cada post, meu objetivo é documentar e dividir o que aprendo, bem como os desafios que encontro, enquanto ajudo outros que também estão explorando essa área. Aqui, você encontrará conteúdos que abrangem uma ampla gama de tópicos, desde noções básicas até conceitos mais avançados e especializados, apresentados por meio de tutoriais práticos, explicações detalhadas e dicas valiosas para quem busca expandir suas habilidades em tecnologia. Cada post conta com uma seção de referências, para que você possa explorar mais a fundo os materiais e fontes utilizados. Além disso, há uma seção de comentários, onde os leitores podem discutir, perguntar e complementar o conteúdo, promovendo uma troca de ideias e experiências que torna o processo mais interativo e colaborativo.</p>
 
 
 </main> 
@@ -225,7 +227,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/fanhenrique\.github\.io\/blog\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -239,6 +241,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
