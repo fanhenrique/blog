@@ -42,3 +42,27 @@ main#quarto-document-content.content {
         margin-bottom: 0;
     }
 }
+
+div.quarto-about-jolla .about-sep {
+    width: 55%;
+}
+
+@media (max-width: 1024px) {
+    main#quarto-document-content.content {
+        width: 85%;
+    }
+
+    div.quarto-about-jolla .about-sep {
+        width: 85%;
+    }
+}
+
+@media (max-width: 720px) {
+    main#quarto-document-content.content {
+        width: 95%;
+    }
+
+    div.quarto-about-jolla .about-sep {
+        width: 95%;
+    }
+}
