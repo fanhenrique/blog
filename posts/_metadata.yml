@@ -58,6 +58,9 @@ code-overflow: scroll
 # Post last modified date
 date-modified: last-modified
 
+# Citation Style Language: https://citationstyles.org/
+# Zotero Style Repository: https://www.zotero.org/styles
+csl: ../abnt.csl
 
 comments:
   giscus:
