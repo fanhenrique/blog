@@ -1,6 +1,6 @@
 {
     "[quarto]": {
         "editor.wordWrap": "bounded",
-        "editor.wordWrapColumn": 60
+        "editor.wordWrapColumn": 65
     },
 }
