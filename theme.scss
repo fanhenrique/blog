@@ -436,3 +436,12 @@ div.quarto-post .metadata {
         }
     }
 }
+
+// Filename to left
+.quarto-figure-center{
+    figure{
+        div{
+            text-align: left;
+        }
+    }
+}
