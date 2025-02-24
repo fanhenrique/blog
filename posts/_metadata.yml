@@ -38,6 +38,10 @@ fig-align: center
 crossrefs-hover: false
 
 
+crossref:
+  lst-title: Código
+
+
 # References bibliography
 citeproc: true
 citations-hover: false
