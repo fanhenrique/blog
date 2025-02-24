@@ -40,6 +40,12 @@ crossrefs-hover: false
 
 crossref:
   lst-title: Código
+  # New custom 'cli' cross-reference for terminal commands
+  custom:
+    - kind: float
+      reference-prefix: Comando
+      key: cli
+      caption-prefix: Comando
 
 
 # References bibliography
