@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Henrique Fan da Silva">
+
+<title>Criando um Blog com Quarto – Blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-6561bbde787c299e21493071c8edc6ff.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f03aa08664bff7d02b74647223397a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about/about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fanhenrique/blog"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+	<div class="quarto-title-banner page-columns page-full">
+		<div class="quarto-title column-body">
+			<h1 class="title">Criando um Blog com Quarto</h1>
+						<p class="subtitle lead">Crie seu próprio blog usando o Quarto</p>
+			
+			
+									
+		</div>
+		
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Henrique Fan da Silva </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Data de Publicação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">25 de fev. de 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Data de Modificação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">25 de fev. de 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+	</div>
+</header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#motivação" id="toc-motivação" class="nav-link active" data-scroll-target="#motivação"><span class="header-section-number">1</span> Motivação</a></li>
+  <li><a href="#construção-do-blog" id="toc-construção-do-blog" class="nav-link" data-scroll-target="#construção-do-blog"><span class="header-section-number">2</span> Construção do Blog</a>
+  <ul>
+  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto"><span class="header-section-number">2.1</span> Quarto</a></li>
+  <li><a href="#blog" id="toc-blog" class="nav-link" data-scroll-target="#blog"><span class="header-section-number">2.2</span> Blog</a></li>
+  <li><a href="#publicação" id="toc-publicação" class="nav-link" data-scroll-target="#publicação"><span class="header-section-number">2.3</span> Publicação</a></li>
+  </ul></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão"><span class="header-section-number">3</span> Conclusão</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="motivação" class="level2" data-number="1">
+<h2 data-number="1" data-anchor-id="motivação"><span class="header-section-number">1</span> Motivação</h2>
+<p>Criei este blog para registrar e compartilhar o que estou estudando e aprendendo em computação, funcionando como um repositório onde compilo minhas descobertas. A cada post, meu objetivo é documentar e dividir o que aprendo, bem como os desafios que encontro, enquanto ajudo outros que também estão explorando essa área. Aqui, você encontrará conteúdos que abrangem uma ampla gama de tópicos, desde noções básicas até conceitos mais avançados e especializados, apresentados por meio de tutoriais práticos, explicações detalhadas e dicas valiosas para quem busca expandir suas habilidades em tecnologia.</p>
+</section>
+<section id="construção-do-blog" class="level2" data-number="2">
+<h2 data-number="2" data-anchor-id="construção-do-blog"><span class="header-section-number">2</span> Construção do Blog</h2>
+<section id="quarto" class="level3" data-number="2.1">
+<h3 data-number="2.1" data-anchor-id="quarto"><span class="header-section-number">2.1</span> Quarto</h3>
+<p>O <a href="https://quarto.org/">Quarto</a> é um sistema <em>open source</em> para publicação científica e técnica, construído sobre o <a href="https://pandoc.org/">Pandoc</a>, um poderoso conversor de arquivos entre diferentes formatos de marcação. Veja na <a href="#fig-quarto-how-it-works" class="quarto-xref">Figura&nbsp;1</a> o funcionamento do Quarto, que combina células de código executável e <a href="https://daringfireball.net/projects/markdown/">Markdown</a> em um arquivo <code>.qmd</code>. Quando um arquivo <code>.qmd</code> é renderizado, os blocos de código são processados pelo <a href="https://jupyter.org/">Jupyter</a> e o resultado, junto ao restante do Markdown, é convertido em um Markdown simples (<code>.md</code>). O Pandoc permite transformar esse documento em uma enorme variedade de formatos de saída (<a href="https://quarto.org/docs/output-formats/all-formats.html">All formats</a>), como HTML, PDF e Microsoft Word, etc.</p>
+<div id="fig-quarto-how-it-works" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-quarto-how-it-works-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Funcionamento do Quarto - <a href="https://quarto.org/docs/get-started/hello/vscode.html#how-it-works">Fonte</a>
+</figcaption>
+<div aria-describedby="fig-quarto-how-it-works-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./qmd-how-it-works.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+</figure>
+</div>
+</section>
+<section id="blog" class="level3" data-number="2.2">
+<h3 data-number="2.2" data-anchor-id="blog"><span class="header-section-number">2.2</span> Blog</h3>
+<p>O Quarto inclui suporte para criação de blogs de forma fácil e simples (<a href="https://quarto.org/docs/websites/website-blog.html">Creating a Blog</a>), com uma diversidade de temas e personalizações. Cada postagem é escrita em formato Markdown, um formato de texto simples e fácil de escrever, e em seguida é convertida para HTML. Informações adicionais, como título, subtítulo, autor, categorias e data de cada documento, são fornecidas no formato YAML no início do próprio arquivo Markdown. Confira a forma de instalação no seu sistema operational (<a href="https://quarto.org/docs/download/">Download Quarto</a>). Com o Quarto é muito fácil criar o projeto de um blog, basta usar o comando <code>quarto create project</code> com o parâmetro <code>blog</code>, especificando o diretório do projeto no argumento seguinte (<a href="#cli-create-project" class="quarto-xref">Comando&nbsp;1</a>). E para renderizar o blog, use o <code>quarto preview</code>. Isso permitirá visualizar o conteúdo no navegador (<a href="#cli-preview" class="quarto-xref">Comando&nbsp;2</a>).</p>
+<div id="cli-create-project" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-cli figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-cli" id="cli-create-project-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Comando&nbsp;1: Criando um Blog com Quarto
+</figcaption>
+<div aria-describedby="cli-create-project-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create project blog <span class="op">&lt;</span>path-to-project<span class="op">&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</figure>
+</div>
+<div id="cli-preview" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-cli figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-cli" id="cli-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Comando&nbsp;2: Pre-visualização
+</figcaption>
+<div aria-describedby="cli-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview <span class="op">&lt;</span>path-to-project<span class="op">&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</figure>
+</div>
+<p>Existem diversas formas de escrever documentos no Quarto (<a href="https://quarto.org/docs/get-started/hello/vscode.html">Tutorial: Hello, Quarto</a>). Estou usando o <a href="https://github.com/VSCodium/vscodium">VSCodium</a>, um popular ambiente de desenvolvimento, o que facilita a escrita em um ambiente voltado para programadores. O Quarto disponibiliza uma <a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto">Extensão para o VSCode</a>, que inclui diversas ferramentas que facilitam o trabalho com documentos Quarto, como renderização e visualização integradas, <em>syntax highlighting</em> para Markdown. Além disso, a extensão oferece <em>autocomplete</em> tanto para opções YAML quanto para linguagens como Python, R e Julia, facilitando a escrita de código. E também conta com comandos e atalhos de teclado para execução de células e linhas selecionadas, bem como pré-visualização para matemática LaTeX e diagramas <a href="https://mermaid.js.org/">Mermaid</a> e <a href="https://graphviz.org/">Graphviz</a>. O uso do VSCode não é obrigatório — é possível escrever documentos no Quarto utilizando outras ferramentas, como Jupyter, RStudio, Neovim, Emacs, Sublime Text ou qualquer outro editor de sua preferência.</p>
+<p>Cada post conta com uma seção de referências bibliográficas, para que você possa explorar mais a fundo os materiais e fontes utilizados. O Quarto usa o Pandoc para gerar automaticamente citações e bibliografia em arquivos no formato BibLaTeX (<code>.bib</code>) ou BibTeX (<code>.bibtex</code>) (<a href="https://quarto.org/docs/authoring/citations.html">Citations</a>). As citações e a bibliografia são formatadas usando a <a href="https://citationstyles.org/">Citation Style Language</a>, arquivos (<code>.csl</code>). Por padrão, o Pandoc usa o formato autor-data do <a href="https://www.chicagomanualofstyle.org/home.html">Chicago Manual of Style</a>, mas é possível alterá-lo. O repositório do <a href="https://www.zotero.org/styles">Zotero</a> disponibiliza uma variedade de estilos de citação. Estou utilizando o estilo da <a href="https://abnt.org.br/">Associação Brasileira de Normas Técnicas (ABNT)</a>, que pode ser encontrado <a href="https://www.zotero.org/styles?q=id%3Aassociacao-brasileira-de-normas-tecnicas">aqui</a>.</p>
+<p>Além da seção de referências bibliográficas, cada post também inclui uma seção de comentários, onde os leitores podem discutir, perguntar e complementar o conteúdo, promovendo a troca de ideias e experiências, o que torna o processo de aprendizado mais interativo e colaborativo. O Quarto possibilita adicionar comentários ao final de cada publicação (<a href="https://quarto.org/docs/output-formats/html-basics.html#commenting">Quarto Comentários</a>). Dentre as opções disponíveis está o <a href="https://github.com/giscus/giscus">Giscus</a>, um sistema de comentários <em>open source</em>, que permite que os visitantes deixem comentários e reações nas suas publicações via um repositório do GitHub. Nenhum banco de dados é necessário, todos os dados são armazenados no <a href="https://docs.github.com/en/discussions">GitHub Discussions</a>, um fórum de comunicação colaborativo para a comunidade de um projeto.</p>
+</section>
+<section id="publicação" class="level3" data-number="2.3">
+<h3 data-number="2.3" data-anchor-id="publicação"><span class="header-section-number">2.3</span> Publicação</h3>
+<p>Há uma grande variedade de maneiras de publicar documentos, apresentações e sites criados usando o Quarto (<a href="https://quarto.org/docs/publishing/">Publishing Basics</a>). Este blog está hospedado no <a href="https://pages.github.com/">GitHub Pages</a>, um serviço de hospedagem de sites que permite publicar conteúdo com base no código-fonte gerenciado em um repositório do GitHub. O Quarto disponibiliza o <a href="https://github.com/quarto-dev/quarto-actions">GitHub Actions for Quarto</a> para construir e publicar automaticamente seus documentos Quarto sempre que você enviar alterações ao seu repositório. Confira o arquivo YAML que usei para fazer o build e o deploy no GitHub Pages <a href="https://github.com/fanhenrique/blog/blob/main/.github/workflows/publish.yml">aqui</a>.</p>
+</section>
+</section>
+<section id="conclusão" class="level2" data-number="3">
+<h2 data-number="3" data-anchor-id="conclusão"><span class="header-section-number">3</span> Conclusão</h2>
+<p>Antes de escolher o Quarto para desenvolver este blog, experimentei diversas ferramentas e até comecei a criá-lo usando apenas o Pandoc. No entanto, gerenciar cada postagem manualmente se mostrou trabalhoso. Com certeza, o Quarto se mostrou uma ótima escolha, pois já oferece toda a estrutura pronta para um blog, facilitando o gerenciamento das postagens de forma simples e intuitiva. Confira o <a href="https://github.com/fanhenrique/blog">repositório deste blog</a> para mais detalhes sobre o código e a implementação. Se você gostou da personalização que fiz neste blog, sinta-se à vontade para criar o seu próprio, fazendo um <em>fork</em> e modificando-o como quiser. Antes de começar a escrever seu primeiro post, recomendo a leitura:</p>
+<ul>
+<li><p><a href="https://pandoc.org/MANUAL.html">Pandoc User Guide</a>.</p></li>
+<li><p><a href="https://quarto.org/docs/guide/">Quarto Guide</a></p></li>
+<li><p><a href="https://quarto.org/docs/websites/website-blog.html">Creating a Blog with Quarto</a>.</p></li>
+</ul>
+<p>Confira as referências para mais detalhes sobre o funcionamento do Quarto e do Pandoc. Caso queira, deixe seu complemento, dúvida, sugestão ou correção sobre o assunto na seção de comentários no final desta página.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referências</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list">
+<div id="ref-citation-style-language" class="csl-entry" role="listitem">
+CITATION STYLE LANGUAGE. <strong>Citation Style Language</strong>. Disponível em: &lt;<a href="https://citationstyles.org/">https://citationstyles.org/</a>&gt;. Acesso em: 10 fev. 2025.
+</div>
+<div id="ref-zotero" class="csl-entry" role="listitem">
+CORPORATION FOR DIGITAL SCHOLARSHIP. <strong>Zotero: Your Personal Research Assistant</strong>. Disponível em: &lt;<a href="https://www.zotero.org/">https://www.zotero.org/</a>&gt;. Acesso em: 10 fev. 2025.
+</div>
+<div id="ref-giscus" class="csl-entry" role="listitem">
+GISCUS CONTRIBUTORS. <strong>Giscus: A comment system powered by GitHub Discussions</strong>. Disponível em: &lt;<a href="https://github.com/giscus/giscus">https://github.com/giscus/giscus</a>&gt;. Acesso em: 10 fev. 2025.
+</div>
+<div id="ref-markdown" class="csl-entry" role="listitem">
+GRUBER, J. <strong>Markdown</strong>. Disponível em: &lt;<a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a>&gt;. Acesso em: 10 fev. 2025.
+</div>
+<div id="ref-pandoc" class="csl-entry" role="listitem">
+MACFARLANE, J. <strong>Pandoc: A Universal Document Converter</strong>. Disponível em: &lt;<a href="https://pandoc.org/">https://pandoc.org/</a>&gt;. Acesso em: 10 fev. 2025.
+</div>
+<div id="ref-quarto" class="csl-entry" role="listitem">
+POSIT PBC. <strong>Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/">https://quarto.org/</a>&gt;. Acesso em: 9 fev. 2025a.
+</div>
+<div id="ref-quarto-tutorial-hello" class="csl-entry" role="listitem">
+POSIT PBC. <strong>Tutorial: Hello, Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/docs/get-started/hello/vscode.html#how-it-works">https://quarto.org/docs/get-started/hello/vscode.html#how-it-works</a>&gt;. Acesso em: 9 fev. 2025h.
+</div>
+<div id="ref-quarto-all-formats" class="csl-entry" role="listitem">
+POSIT PBC. <strong>All Formats, Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/docs/output-formats/all-formats.html">https://quarto.org/docs/output-formats/all-formats.html</a>&gt;. Acesso em: 9 fev. 2025c.
+</div>
+<div id="ref-quarto-download" class="csl-entry" role="listitem">
+POSIT PBC. <strong>Download Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/docs/download/">https://quarto.org/docs/download/</a>&gt;. Acesso em: 9 fev. 2025f.
+</div>
+<div id="ref-quarto-citations" class="csl-entry" role="listitem">
+POSIT PBC. <strong>Citations, Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/docs/authoring/citations.html">https://quarto.org/docs/authoring/citations.html</a>&gt;. Acesso em: 9 fev. 2025d.
+</div>
+<div id="ref-quarto-commenting" class="csl-entry" role="listitem">
+POSIT PBC. <strong>HTML Basics, Commenting, Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/docs/output-formats/html-basics.html#commenting">https://quarto.org/docs/output-formats/html-basics.html#commenting</a>&gt;. Acesso em: 9 fev. 2025e.
+</div>
+<div id="ref-quarto-publishing" class="csl-entry" role="listitem">
+POSIT PBC. <strong>Publishing Basics, Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/docs/publishing/">https://quarto.org/docs/publishing/</a>&gt;. Acesso em: 9 fev. 2025g.
+</div>
+<div id="ref-quarto-actions" class="csl-entry" role="listitem">
+POSIT PBC. <strong>GitHub Actions for Quarto</strong>. Disponível em: &lt;<a href="https://github.com/quarto-dev/quarto-actions">https://github.com/quarto-dev/quarto-actions</a>&gt;. Acesso em: 9 fev. 2025b.
+</div>
+<div id="ref-quarto-vscode" class="csl-entry" role="listitem">
+POSIT PBC. <strong>VS Code, Quarto</strong>. Disponível em: &lt;<a href="https://quarto.org/docs/tools/vscode.html">https://quarto.org/docs/tools/vscode.html</a>&gt;. Acesso em: 9 fev. 2025i.
+</div>
+<div id="ref-vscode-extension" class="csl-entry" role="listitem">
+POSIT PBC. <strong>Visual Studio Marketplace, Quarto VS Code Extension</strong>. Disponível em: &lt;<a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto">https://marketplace.visualstudio.com/items?itemName=quarto.quarto</a>&gt;. Acesso em: 9 fev. 2025j.
+</div>
+<div id="ref-chicago-manual-style" class="csl-entry" role="listitem">
+THE UNIVERSITY OF CHICAGO. <strong>The Chicago Manual of Style Online</strong>. Disponível em: &lt;<a href="https://www.chicagomanualofstyle.org/home.html">https://www.chicagomanualofstyle.org/home.html</a>&gt;. Acesso em: 10 fev. 2025.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/fanhenrique\.github\.io\/blog\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="fanhenrique/blog" data-repo-id="R_kgDONMKAJw" data-category="General" data-category-id="DIC_kwDONMKAJ84CkJwQ" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_protanopia" data-lang="pt" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="dark_protanopia">
+<input type="hidden" id="giscus-alt-theme" value="dark_protanopia">
+</div> <!-- /content -->
+
+
+
+
+</body></html>
