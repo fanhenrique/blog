@@ -4,6 +4,25 @@ subtitle: Crie seu próprio blog usando o Quarto
 author: Henrique Fan da Silva
 date: 2025-02-25
 categories: [blog, quarto, markdown, primeiro post]
+bibliography: bibliography.bib
+nocite: |
+    @quarto
+    @quarto-tutorial-hello
+    @quarto-all-formats
+    @quarto--creating-blog
+    @quarto-download
+    @quarto-citations
+    @quarto-commenting
+    @quarto-publishing
+    @quarto-actions
+    @quarto-vscode
+    @vscode-extension
+    @pandoc
+    @zotero
+    @citation-style-language
+    @chicago-manual-style
+    @giscus
+    @markdown
 ---
 
 # Motivação
