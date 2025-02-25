@@ -1,5 +1,5 @@
 ---
-title: Criando um Blog com Quarto
+title: Criando um blog com o Quarto
 subtitle: Crie seu próprio blog usando o Quarto
 author: Henrique Fan da Silva
 date: 2025-02-25
