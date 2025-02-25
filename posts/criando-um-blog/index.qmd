@@ -1,0 +1,65 @@
+---
+title: Criando um Blog com Quarto
+subtitle: Crie seu próprio blog usando o Quarto
+author: Henrique Fan da Silva
+date: 2025-02-25
+categories: [blog, quarto, markdown, primeiro post]
+---
+
+# Motivação
+
+Criei este blog para registrar e compartilhar o que estou estudando e aprendendo em computação, funcionando como um repositório onde compilo minhas descobertas. A cada post, meu objetivo é documentar e dividir o que aprendo, bem como os desafios que encontro, enquanto ajudo outros que também estão explorando essa área. Aqui, você encontrará conteúdos que abrangem uma ampla gama de tópicos, desde noções básicas até conceitos mais avançados e especializados, apresentados por meio de tutoriais práticos, explicações detalhadas e dicas valiosas para quem busca expandir suas habilidades em tecnologia.
+
+# Construção do Blog
+
+## Quarto
+
+O [Quarto](https://quarto.org/) é um sistema *open source* para publicação científica e técnica, construído sobre o [Pandoc](https://pandoc.org/), um poderoso conversor de arquivos 
+entre diferentes formatos de marcação. Veja na [@fig-quarto-how-it-works] o funcionamento do Quarto, que combina células de código executável e [Markdown](https://daringfireball.net/projects/markdown/) em um arquivo `.qmd`. Quando um arquivo `.qmd` é renderizado, os blocos de código são processados pelo [Jupyter](https://jupyter.org/) e o resultado, junto ao restante do Markdown, é convertido em um Markdown simples (`.md`). O Pandoc permite transformar esse documento em uma enorme variedade de formatos de saída ([All formats](https://quarto.org/docs/output-formats/all-formats.html)), como HTML, PDF e Microsoft Word, etc.
+
+:::{#fig-quarto-how-it-works}
+![](./qmd-how-it-works.png){width=85%}
+
+Funcionamento do Quarto - [Fonte](https://quarto.org/docs/get-started/hello/vscode.html#how-it-works)
+:::
+
+## Blog
+<!-- Como criar o blog com o Quarto -->
+O Quarto inclui suporte para criação de blogs de forma fácil e simples ([Creating a Blog](https://quarto.org/docs/websites/website-blog.html)), com uma diversidade de temas e personalizações. Cada postagem é escrita em formato Markdown, um formato de texto simples e fácil de escrever, e em seguida é convertida para HTML. Informações adicionais, como título, subtítulo, autor, categorias e data de cada documento, são fornecidas no formato YAML no início do próprio arquivo Markdown. Confira a forma de instalação no seu sistema operational ([Download Quarto](https://quarto.org/docs/download/)). Com o Quarto é muito fácil criar o projeto de um blog, basta usar o comando `quarto create project` com o parâmetro `blog`, especificando o diretório do projeto no argumento seguinte ([@cli-create-project]). E para renderizar o blog, use o `quarto preview`. Isso permitirá visualizar o conteúdo no navegador ([@cli-preview]).
+
+:::{#cli-create-project cli-cap="Criando um Blog com Quarto" filename="Terminal"}
+```{.bash}
+quarto create project blog <path-to-project>
+```
+:::
+
+:::{#cli-preview cli-cap="Pre-visualização" filename="Terminal"}
+```{.bash}
+quarto preview <path-to-project>
+```
+:::
+
+<!-- Como eu escrevo os posts -->
+Existem diversas formas de escrever documentos no Quarto ([Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html)). Estou usando o [VSCodium](https://github.com/VSCodium/vscodium), um popular ambiente de desenvolvimento, o que facilita a escrita em um ambiente voltado para programadores. O Quarto disponibiliza uma [Extensão para o VSCode](https://marketplace.visualstudio.com/items?itemName=quarto.quarto), que inclui diversas ferramentas que facilitam o trabalho com documentos Quarto, como renderização e visualização integradas, *syntax highlighting* para Markdown.  Além disso, a extensão oferece *autocomplete* tanto para opções YAML quanto para linguagens como Python, R e Julia, facilitando a escrita de código. E também conta com comandos e atalhos de teclado para execução de células e linhas selecionadas, bem como pré-visualização para matemática LaTeX e diagramas [Mermaid](https://mermaid.js.org/) e [Graphviz](https://graphviz.org/). O uso do VSCode não é obrigatório — é possível escrever documentos no Quarto utilizando outras ferramentas, como Jupyter, RStudio, Neovim, Emacs, Sublime Text ou qualquer outro editor de sua preferência.
+
+<!-- Seção de Referências Bibliográficas -->
+Cada post conta com uma seção de referências bibliográficas, para que você possa explorar mais a fundo os materiais e fontes utilizados. O Quarto usa o Pandoc para gerar automaticamente citações e bibliografia em arquivos no formato BibLaTeX (`.bib`) ou BibTeX (`.bibtex`) ([Citations](https://quarto.org/docs/authoring/citations.html)). As citações e a bibliografia são formatadas usando a [Citation Style Language](https://citationstyles.org/), arquivos (`.csl`). Por padrão, o Pandoc usa o formato autor-data do [Chicago Manual of Style](https://www.chicagomanualofstyle.org/home.html), mas é possível alterá-lo. O repositório do [Zotero](https://www.zotero.org/styles) disponibiliza uma variedade de estilos de citação. Estou utilizando o estilo da [Associação Brasileira de Normas Técnicas (ABNT)](https://abnt.org.br/), que pode ser encontrado [aqui](https://www.zotero.org/styles?q=id%3Aassociacao-brasileira-de-normas-tecnicas).
+
+<!-- Seção de Comentários -->
+Além da seção de referências bibliográficas, cada post também inclui uma seção de comentários, onde os leitores podem discutir, perguntar e complementar o conteúdo, promovendo a troca de ideias e experiências, o que torna o processo de aprendizado mais interativo e colaborativo. O Quarto possibilita adicionar comentários ao final de cada publicação ([Quarto Comentários](https://quarto.org/docs/output-formats/html-basics.html#commenting)). Dentre as opções disponíveis está o [Giscus](https://github.com/giscus/giscus), um sistema de comentários *open source*, que permite que os visitantes deixem comentários e reações nas suas publicações via um repositório do GitHub. Nenhum banco de dados é necessário, todos os dados são armazenados no [GitHub Discussions](https://docs.github.com/en/discussions), um fórum de comunicação colaborativo para a comunidade de um projeto.
+
+## Publicação
+<!-- Como o blog foi publicado -->
+Há uma grande variedade de maneiras de publicar documentos, apresentações e sites criados usando o Quarto ([Publishing Basics](https://quarto.org/docs/publishing/)). Este blog está hospedado no [GitHub Pages](https://pages.github.com/), um serviço de hospedagem de sites que permite publicar conteúdo com base no código-fonte gerenciado em um repositório do GitHub. O Quarto disponibiliza o [GitHub Actions for Quarto](https://github.com/quarto-dev/quarto-actions) para construir e publicar automaticamente seus documentos Quarto sempre que você enviar alterações ao seu repositório. Confira o arquivo YAML que usei para fazer o build e o deploy no GitHub Pages [aqui](https://github.com/fanhenrique/blog/blob/main/.github/workflows/publish.yml).
+
+# Conclusão
+
+Antes de escolher o Quarto para desenvolver este blog, experimentei diversas ferramentas e até comecei a criá-lo usando apenas o Pandoc. No entanto, gerenciar cada postagem manualmente se mostrou trabalhoso. Com certeza, o Quarto se mostrou uma ótima escolha, pois já oferece toda a estrutura pronta para um blog, facilitando o gerenciamento das postagens de forma simples e intuitiva. Confira o [repositório deste blog](https://github.com/fanhenrique/blog) para mais detalhes sobre o código e a implementação. Se você gostou da personalização que fiz neste blog, sinta-se à vontade para criar o seu próprio, fazendo um *fork* e modificando-o como quiser. Antes de começar a escrever seu primeiro post, recomendo a leitura:
+
+- [Pandoc User Guide](https://pandoc.org/MANUAL.html).
+
+- [Quarto Guide](https://quarto.org/docs/guide/)
+
+- [Creating a Blog with Quarto](https://quarto.org/docs/websites/website-blog.html).
+
+Confira as referências para mais detalhes sobre o funcionamento do Quarto e do Pandoc. Caso queira, deixe seu complemento, dúvida, sugestão ou correção sobre o assunto na seção de comentários no final desta página.
