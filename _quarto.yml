@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Blog"
+  google-analytics: "G-C0FDYGYMWV"
   navbar:
     pinned: false
     right:
